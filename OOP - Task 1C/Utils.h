@@ -9,5 +9,6 @@ class Utils
     static std::string getLineFromUser();
     static char getCharFromUser();
     
-    // TODO: 2 versions of ToUpper
+    static std::string ToUpperR(std::string s);
+    static std::string ToUpperI(std::string s);
 };
