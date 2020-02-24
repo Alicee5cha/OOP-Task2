@@ -62,6 +62,7 @@ class List
     void deleteOne(const T&);                // delete first occurrence of item
     int length() const;                      // return length
     bool contains(const T&) const;           // check if an item is in list
+    T& operator [] (int index) const;
   private:
     Node<T>* head;                           // point onto first item (nullptr if empty)
     Node<T>* end() const;                    // return address of last item (nullptr if empty)
@@ -280,4 +281,21 @@ void List<T>::copy(const List<T>& other)
         assert(pnew->next != nullptr);
         pnew = pnew->next;
     }
+}
+
+template <class T>
+T& List<T>::operator[](int index) const
+{
+    assert(index >= 0);
+    assert(index <= this->length());
+    assert(head != nullptr);
+
+    Node<T>* type = head;
+    while (index > 0)
+    {
+        type = type->next;
+        index--;
+    }
+
+    return (type->item);
 }
