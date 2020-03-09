@@ -170,6 +170,7 @@
     <ClInclude Include="LoginUserMenu.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="ListT.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Store.h" />
     <ClInclude Include="StoreMenu.h" />
