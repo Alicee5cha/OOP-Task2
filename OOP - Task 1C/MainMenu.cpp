@@ -7,10 +7,6 @@ MainMenu::MainMenu(const std::string& title, Application* app) : Menu(title, app
 
 void MainMenu::OutputOptions()
 {
-	system("CLS");
-	std::cout << "                    \n";
-	std::cout << "  -= GAME LIBRARY =-\n";
-	std::cout << "                    \n";
 	Option('S', "Browse Store");
 
 	if (!app->IsUserLoggedIn())
@@ -37,7 +33,6 @@ bool MainMenu::HandleChoice(char choice)
 	{
 		if (!app->IsUserLoggedIn())
 		{
-			// this would need to go to a LoginMenu - similar to StoreMenu
 			// instead we just set logged in to true on the main app object
 			LoginUserMenu("LOGIN", app);
 		}
