@@ -5,13 +5,16 @@
 class Game
 {
 	public:
-		Game(const std::string&, const std::string&, int, int);
+		Game(const int id,const std::string&, const std::string&, int, int);
 		~Game();
 
 		const std::string& GetName() const;
 		const std::string& GetDescription() const;
-		int GetCost() const;
+		const int GetCost() const;
+		const int GetAgeRat() const;
+		const int GetId() const;
 	private:
+		int id;
 		std::string name;
 		std::string description;
 		int cost;

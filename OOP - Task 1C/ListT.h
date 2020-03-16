@@ -215,6 +215,7 @@ void List<T>::deleteOne(const T& item)
 
 template <class T>
 int List<T>::length() const
+
 {
     int size = 0;
 
