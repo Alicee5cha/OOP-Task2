@@ -7,8 +7,20 @@ Account::Account(const std::string& email, const std::string& password, const st
 
 Account::~Account()
 {
-	for (int i = 0; i < 3; ++i)
+	int len = users.length();
+	for (int i = 0; i < len; ++i)
 	{
-		delete users[i];
+		//delete users[0];
+		users.deleteFirst();
 	}
+}
+
+const std::string Account::GetEmail() const{
+	return email;
+}
+const std::string Account::GetPass() const {
+	return password;
+}
+const std::string Account::GetDate() const {
+	return created;
 }

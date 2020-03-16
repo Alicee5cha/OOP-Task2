@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Account.h"
-#include "User.h"
+
+#include "Admin.h"
 #include "Store.h"
 
 class Application
@@ -20,6 +21,8 @@ class Application
 		bool LoginAccount(const std::string& email, const std::string& password);
 		bool LoginUser(const std::string& username, const std::string& password);
 		void LogoutUser();
+		void Load();
+		void Save();
 		
 		List<Account*> accounts = { };
 	private:
