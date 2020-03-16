@@ -8,10 +8,10 @@ LoginUserMenu::LoginUserMenu(const std::string& title, Application* app) : Menu(
 void LoginUserMenu::OutputOptions()
 {
 	if (!app->IsUserLoggedIn())
-	{
-		for (int i = 0; i < 3; i++) // TODO: Hardcoded, change when using List<T>
+	{//TODO: Make a loop for all accounts to be listed.
+		for (int i = 0; i < app->accounts[0]->users.length(); i++)
 		{
-			std::cout << "  " << (i + 1) << ") " << app->GetCurrentAccount()->users[i]->GetUsername() << "\n";
+			std::cout << "  " << (i + 1) << ") " << (app->accounts[0]->users[i]->GetUsername()) << '\n';
 		}
 
 	}
@@ -26,8 +26,7 @@ bool LoginUserMenu::HandleChoice(char choice)
 	// this reverses the + 1 above and lets us do the range check below
 	int index = choice - '1';
 
-	// after dylan changes to list //app->GetUsers().users.size()
-	if (index >= 0 && index < 3)
+	if (index >= 0 && index < app->accounts.length())
 	{
 		BlockingMessage("Not implemented, press return to continue");
 		// go to user profile page
