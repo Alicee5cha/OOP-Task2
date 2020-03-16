@@ -7,8 +7,7 @@ StoreMenu::StoreMenu(const std::string& title, Application* app) : Menu(title, a
 
 void StoreMenu::OutputOptions()
 {
-	// after dylan changes to list  //app->GetStore().games
-	for (int i = 0; i <  9; i++)
+	for (int i = 0; i <  app->GetStore().games.length(); i++)
 	{
 		// adding 1 so the display is nicer for the user
 		Option(i + 1, app->GetStore().games[i]->GetName());
@@ -22,8 +21,7 @@ bool StoreMenu::HandleChoice(char choice)
 	// this reverses the + 1 above and lets us do the range check below
 	int index = choice - '1';
 
-	// after dylan changes to list //app->GetStore().games.size()
-	if (index >= 0 && index < 9)
+	if (index >= 0 && index < app->GetStore().games.length())
 	{
 		BlockingMessage("Not implemented, press return to continue");
 		// go to game detail page
