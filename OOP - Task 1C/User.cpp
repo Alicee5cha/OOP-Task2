@@ -29,6 +29,6 @@ const int User::GetCredit() const {
 	return credits;
 }
 
-List<LibraryItem*> User::getLibrary() {
-	return library;
+List<LibraryItem*>* User::getLibrary() {
+	return &library;
 }

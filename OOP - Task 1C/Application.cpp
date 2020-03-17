@@ -65,9 +65,9 @@ void Application::LogoutUser()
 
 void Application::Load()
 {
-	ifstream file;
-	file.open("data.txt");
-	string currentLine;
+	ifstream file("data.txt"); //Open file.
+
+	string currentLine;	//Current line to check, usually one of the headers below.
 	string headers[5] = {"GAME","ACCOUNT","ACCOUNT-PLAYER","LIBRARY-ITEM","ACCOUNT-ADMIN"};
 
 	getline(file,currentLine);
@@ -76,44 +76,42 @@ void Application::Load()
 	{
 		if (currentLine == headers[0])//Game
 		{
-			string gId;
-			string gName;
-			string gDesc;
-			string gCost;
-			string gAgeRat;
+			string gId, gName ,gDesc, gCost, gAgeRat; //Game data strings.
 
-			getline(file,gId);
-			getline(file,gName);
-			getline(file,gDesc);
-			getline(file,gCost);
-			getline(file,gAgeRat);
+			getline(file,gId);		//Game id.
+			getline(file,gName);	//Game name.
+			getline(file,gDesc);	//Game description.
+			getline(file,gCost);	//Game cost.
+			getline(file,gAgeRat);	//Game agerating.
 
-			store.games.addAtEnd(new Game(stoi(gId),gName, gDesc, stoi(gCost), stoi(gAgeRat)));
+			store.games.addAtEnd(new Game(stoi(gId),gName, gDesc, stoi(gCost), stoi(gAgeRat))); //Create new game.
 
-			getline(file, currentLine);
+			getline(file, currentLine); //Get the next header.
 		}
 		else
 			if (currentLine == headers[1])//Account
 			{
 				//Super account;
-				string dateA;
-				string email;
-				string password;
+				string dateA;		//Account made date
+				string emailA;		//Account email
+				string passwordA;	//Account password
 				getline(file, dateA);
-				getline(file, email);
-				getline(file, password);
-				Account* a = new Account(email, password, dateA);
-				getline(file , currentLine);
+				getline(file, emailA);
+				getline(file, passwordA);
+
+				Account* a = new Account(emailA, passwordA, dateA);//Make the account
+
+				getline(file , currentLine); //Get the next header.
 
 				do
 				{
 					
 					if (currentLine == headers[2] || currentLine == headers[4])//Account player or admin
 					{
-						string dateU;
-						string userU;
-						string passwordU;
-						string credU;
+						string dateU;		//User date
+						string userU;		//User username
+						string passwordU;	//User password
+						string credU;		//User credits
 
 						getline(file,dateU);
 						getline(file, userU);
@@ -121,14 +119,14 @@ void Application::Load()
 						getline(file,credU);
 
 
-						string id;
-						string date;
-						string hours;
+						string idL;			//Library item, game id.
+						string dateL;		//Library item, date bought.
+						string hoursL;		//Library item, hours played.
 
 						if (currentLine == headers[2]) //Player
 						{
-							Player* p = new Player(userU, passwordU, dateU,stoi(credU));
-							getline(file, currentLine);
+							Player* u = new Player(userU, passwordU, dateU,stoi(credU));
+							getline(file, currentLine); //Get next header.
 							
 
 							do {
@@ -137,46 +135,46 @@ void Application::Load()
 								{
 
 
-									getline(file, id);
-									getline(file, date);
-									getline(file, hours);
+									getline(file, idL);
+									getline(file, dateL);
+									getline(file, hoursL);
 									Game* cGame;
 									for (int i = 0; i < store.games.length(); i++)
 									{
-										if (store.games[i]->GetId() == stoi(id))
+										if (store.games[i]->GetId() == stoi(idL))
 										{
 											cGame = store.games[i];
-											LibraryItem* l = new LibraryItem(date, cGame);
-											p->getLibrary().addAtEnd(l);
+											LibraryItem* l = new LibraryItem(dateL, cGame);
+											u->getLibrary()->addAtEnd(l);
 										}
 									}
 
-									getline(file, currentLine);
+									getline(file, currentLine); //Get next header.
 								}
 							} while (currentLine == headers[3]);
-							a->users.addAtEnd(p);
+
+							a->users.addAtEnd(u); //Add the user to the account.
 						}
 						else
 						{//Admin
-							Admin* p = new Admin(userU, passwordU, dateU, stoi(credU));
+							Admin* u = new Admin(userU, passwordU, dateU, stoi(credU));
 							getline(file, currentLine);
 							do {
 
 								if (currentLine == headers[3])//Purchased game
 								{
 
-									getline(file, id);
-									getline(file, date);
-									getline(file, hours);
-									Game* cGame = nullptr;
+									getline(file, idL);
+									getline(file, dateL);
+									getline(file, hoursL);
+									Game* cGame;
 									for (int i = 0; i < store.games.length(); i++)
 									{
-										if (store.games[i]->GetId() == stoi(id))
+										if (store.games[i]->GetId() == stoi(idL))
 										{
 											cGame = store.games[i];
-											LibraryItem* l = new LibraryItem(date, cGame);
-											List<LibraryItem*> lib = p->getLibrary();
-											lib.addAtEnd(l);
+											LibraryItem* l = new LibraryItem(dateL, cGame);
+											u->getLibrary()->addAtEnd(l);
 											break;
 										}
 									}
@@ -184,22 +182,24 @@ void Application::Load()
 									getline(file, currentLine);
 								}
 							} while (currentLine == headers[3]);
-							List<User*> newAUsers = a->users;
-							newAUsers.addAtEnd(p);
+							a->users.addAtEnd(u);	//After user had been built, add it to the account.
 						}		
 					}
 								
 				} while (currentLine == headers[2] || currentLine == headers[4]);
-				accounts.addAtEnd(a);
-				getline(file, currentLine);
+
+				accounts.addAtEnd(a); //After all parts for the account have been made, add it to the list of accounts.
+
+				getline(file, currentLine);	//Get next header.
 			}
 	} while(currentLine != "");
 	file.close();
 }
+
 void Application::Save()
 {
 	ofstream file;
-	file.open("tempData.txt");//TODO: Fix library item saving not working.
+	file.open("data.txt");
 
 	for (int i =0;i<store.games.length();i++)
 	{
@@ -237,7 +237,7 @@ void Application::Save()
 			file << cUser->GetPass() << endl;
 			file << cUser->GetCredit() << endl;
 
-			List<LibraryItem*> li = cUser->getLibrary();
+			List<LibraryItem*> li = *cUser->getLibrary();
 			for (int lItem = 0; lItem < li.length(); lItem++)
 			{
 				file << "LIBRARY-ITEM" << endl;
