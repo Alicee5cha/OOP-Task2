@@ -16,6 +16,7 @@ Application::~Application()
 	}
 }
 
+
 bool Application::IsUserLoggedIn() const
 {
 	return currentUser != nullptr;

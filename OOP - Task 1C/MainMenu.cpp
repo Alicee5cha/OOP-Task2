@@ -12,11 +12,11 @@ void MainMenu::OutputOptions()
 	if (!app->IsUserLoggedIn())
 	{
 		Option('L', "Login");
-		Option('Q', "Quit");
 	}
 	else
 	{
-		Option('L', "Logout");
+		Option('L', "Logout of " + app->GetCurrentUser()->GetUsername());
+		Option('P', "View profile for " + app->GetCurrentUser()->GetUsername());
 	}
 }
 
@@ -33,7 +33,6 @@ bool MainMenu::HandleChoice(char choice)
 	{
 		if (!app->IsUserLoggedIn())
 		{
-			// instead we just set logged in to true on the main app object
 			LoginUserMenu("LOGIN", app);
 		}
 		else
@@ -41,10 +40,9 @@ bool MainMenu::HandleChoice(char choice)
 			app->LogoutUser();
 		}
 	} break;
-	case 'Q':
+	case 'P':
 	{
-		exit;
-		
+		//proflie page
 	} break;
 	}
 
