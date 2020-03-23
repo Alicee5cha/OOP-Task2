@@ -2,6 +2,7 @@
 
 #include <string>
 #include "Player.h"
+#include "date.h"
 
 class Account
 {
@@ -12,10 +13,10 @@ class Account
 		
 		const std::string GetEmail()const;
 		const std::string GetPass()const;
-		const std::string GetDate()const;
+		const Date* GetDate()const;
 
 	private:
 		std::string email;
 		std::string password;
-		std::string created;  // TODO: replace with custom Date class, currently YYYY-MM-DD
+		Date* created; 
 };

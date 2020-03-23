@@ -1,17 +1,17 @@
 #pragma once
 
 #include "Game.h"
-
+#include "date.h"
 class LibraryItem
 {
 	public:
 		LibraryItem(const std::string&, Game*);
 		~LibraryItem();
 		const Game* getGame()const;
-		const std::string purchasedDate() const;
+		const Date* purchasedDate() const;
 		const double getTime() const;
 	private:
 		const Game *game;
-		const std::string purchased;  // TODO: replace with custom Date class, currently YYYY-MM-DD
+		const Date* purchased; 
 		double time;
 };

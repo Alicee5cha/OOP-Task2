@@ -1,8 +1,9 @@
 #include "User.h"
 
-User::User(const std::string& username, const std::string& password, const std::string& created, int cred)
-	: username(username), password(password), created(created), credits(cred)
+User::User(const std::string& username, const std::string& password, const std::string& date, int cred)
+	: username(username), password(password), credits(cred)
 {
+	created = new Date(date);
 }
 
 User::~User()
@@ -21,7 +22,7 @@ const std::string& User::GetPass() const
 {
 	return password;
 }
-const std::string& User::GetDateMade() const
+const Date* User::GetDateMade() const
 {
 	return created;
 }

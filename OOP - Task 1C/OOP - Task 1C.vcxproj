@@ -149,6 +149,7 @@
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Date.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="LibraryItem.cpp" />
     <ClCompile Include="LoginUserMenu.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Account.h" />
     <ClInclude Include="Admin.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="date.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="LibraryItem.h" />
     <ClInclude Include="LoginUserMenu.h" />

@@ -3,6 +3,8 @@
 #include <string>
 #include "LibraryItem.h"
 #include "ListT.h"
+#include "date.h"
+
 class User
 {
 	public:
@@ -10,13 +12,13 @@ class User
 		virtual ~User();
 		const std::string& GetUsername() const;
 		const std::string& GetPass() const;
-		const std::string& GetDateMade() const;
+		const Date* GetDateMade() const;
 		const int GetCredit()const;
 		List<LibraryItem*>* getLibrary();
 	private:
 		std::string username;
 		std::string password;
-		std::string created;  // TODO: replace with custom Date class, currently YYYY-MM-DD
+		Date* created; 
 		int credits;
 		List<LibraryItem*> library = { };
 };
