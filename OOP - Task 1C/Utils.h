@@ -11,4 +11,5 @@ class Utils
     
     static std::string ToUpperR(std::string s);
     static std::string ToUpperI(std::string s);
+    static bool StartsWith(std::string fullText, std::string searchText);
 };

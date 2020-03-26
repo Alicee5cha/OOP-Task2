@@ -24,7 +24,7 @@ bool StoreMenu::HandleChoice(char choice)
 	if (index >= 0 && index < app->GetStore().games.length())
 	{
 		BlockingMessage("Not implemented, press return to continue");
-		// go to game detail page
+		//TODO: Create game page. go to game detail page.
 	}
 
 	return false;

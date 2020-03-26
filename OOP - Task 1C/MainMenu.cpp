@@ -9,41 +9,65 @@ void MainMenu::OutputOptions()
 {
 	Option('S', "Browse Store");
 
-	if (!app->IsUserLoggedIn())
+	if (!app->IsAccountLoggedIn())
 	{
-		Option('L', "Login");
+		Option('A', "Login Account ");
 	}
 	else
 	{
-		Option('L', "Logout of " + app->GetCurrentUser()->GetUsername());
-		Option('P', "View profile for " + app->GetCurrentUser()->GetUsername());
+		Option('A', "Logout Account " + app->GetCurrentAccount()->GetEmail());
+
+		if (!app->IsUserLoggedIn())
+		{
+			Option('L', "Login User");
+		}
+		else
+		{
+			Option('L', "Logout of " + app->GetCurrentUser()->GetUsername());
+			Option('P', "View profile for " + app->GetCurrentUser()->GetUsername());
+		}
 	}
+	
 }
 
 bool MainMenu::HandleChoice(char choice)
 {
 	switch (choice)
 	{
-	case 'S':
-	{
-		StoreMenu("STORE", app);
+		case 'S':
+		{
+			StoreMenu("STORE", app);
 
-	} break;
-	case 'L':
-	{
-		if (!app->IsUserLoggedIn())
+		} break;
+
+		case 'A':
 		{
-			LoginUserMenu("LOGIN", app);
-		}
-		else
+			if (!app->IsAccountLoggedIn())
+			{
+				LoginAccountMenu("ACCOUNT LOGIN", app);
+			}
+			else
+			{
+				app->LogoutAccount();//This logs out user before logging out account.
+			}
+		}break;
+
+		case 'L':
 		{
-			app->LogoutUser();
-		}
-	} break;
-	case 'P':
-	{
-		//proflie page
-	} break;
+			if (!app->IsUserLoggedIn() && app->IsAccountLoggedIn())
+			{
+				LoginUserMenu("USER LOGIN", app);
+			}
+			else
+			{
+				app->LogoutUser();//'L' Defaults to this if no account is logged in. AKA nothing happens when no account logged in. 
+			}
+		} break;
+
+		case 'P':
+		{
+			//proflie page
+		} break;
 	}
 
 	return false;

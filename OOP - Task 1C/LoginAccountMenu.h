@@ -2,10 +2,10 @@
 
 #include "Menu.h"
 
-class LoginUserMenu : public Menu
+class LoginAccountMenu : public Menu
 {
 public:
-	LoginUserMenu(const std::string& title, Application* app);
+	LoginAccountMenu(const std::string& title, Application* app);
 	void OutputOptions() override;
 	bool HandleChoice(char choice) override;
 };

@@ -36,3 +36,10 @@ std::string Utils::ToUpperR(std::string s)
     else
         return s;
 }
+
+bool Utils::StartsWith(std::string fullText, std::string searchText)
+{
+    if (ToUpperR(fullText).substr(0, searchText.length())._Equal(ToUpperR(searchText)))
+        return true;
+    return false;
+}
