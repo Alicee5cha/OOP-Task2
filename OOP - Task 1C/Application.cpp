@@ -42,29 +42,46 @@ Store& Application::GetStore()
 	return store;
 }
 
-bool Application::LoginAccount(const std::string& email, const std::string& password)
+const bool Application::LoginAccount(const std::string& email, const std::string& password)
 {
-	// TODO: This currently always logs you in as the first account
-	currentAccount = accounts[0];
-
-	return true;
+	for (int i = 0; i < accounts.length(); i++)
+	{
+		if (accounts[i]->GetEmail()._Equal(email))
+			if (accounts[i]->GetPass()._Equal(password))
+			{
+				currentAccount = accounts[i];
+				return true;
+			}
+	}
+	return false;
 }
 
-bool Application::LoginUser(const std::string& username, const std::string& password)
+const void Application::LogoutAccount()
 {
-	// TODO: This currently always logs you in as the first user
-	
-	currentUser = currentAccount->users[0];
-
-	return true;
+	LogoutUser();
+	currentAccount = nullptr;
 }
 
-void Application::LogoutUser()
+const bool Application::LoginUser(const std::string& username, const std::string& password)
+{
+	for (int i=0;i<currentAccount->users.length();i++)
+	{
+		if (currentAccount->users[i]->GetUsername()._Equal(username))
+			if (currentAccount->users[i]->GetPass()._Equal(password))
+			{
+				currentUser = currentAccount->users[i];
+				return true;
+			}
+	}
+	return false;
+}
+
+const void Application::LogoutUser()
 {
 	currentUser = nullptr;
 }
 
-void Application::Load()
+const void Application::Load()
 {
 	ifstream file("data.txt"); //Open file.
 
@@ -197,7 +214,7 @@ void Application::Load()
 	file.close();
 }
 
-void Application::Save()
+const void Application::Save()
 {
 	ofstream file;
 	file.open("data.txt");
