@@ -15,6 +15,7 @@ class User
 		const Date* GetDateMade() const;
 		const int GetCredit()const;
 		List<LibraryItem*>* getLibrary();
+		const bool User::MinusCredits(const int amount);
 	private:
 		std::string username;
 		std::string password;

@@ -1,5 +1,5 @@
 #include "StoreMenu.h"
-
+#include "GameDetailsMenu.h"
 StoreMenu::StoreMenu(const std::string& title, Application* app) : Menu(title, app)
 {
 	Paint(); // required in constructor
@@ -23,9 +23,9 @@ bool StoreMenu::HandleChoice(char choice)
 
 	if (index >= 0 && index < app->GetStore().games.length())
 	{
-		BlockingMessage("Not implemented, press return to continue");
-		//TODO: Create game page. go to game detail page.
+		GameDetailsMenu("STORE ",app,app->GetStore().games[index]);
 	}
 
 	return false;
 }
+

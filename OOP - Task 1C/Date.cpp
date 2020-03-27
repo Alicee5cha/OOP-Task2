@@ -5,23 +5,20 @@
 #include "Date.h"
 
 using namespace std;
-
-
+Date::Date()
+{
+}
 Date::Date(string date)
 {
-	date;
-	string delimiter = "-";
+	year = stoi(date.substr(0, 4));
+	month = stoi(date.substr(5, 2));
+	day = stoi(date.substr(8, 2));
 
-	size_t pos = 0;
-	string dateMaker;
-	while ((pos = date.find(delimiter)) != string::npos) {
-		dateMaker = date.substr(0, pos);
-		cout << dateMaker;
-		date.erase(0, pos + delimiter.length());
-	}
-	cout << date;
-	/*strfpime(date, " %d-%m-%Y", this->date);
-	this->date = date;*/
+	
+}
+Date::Date(int d, int m, int y):day(d),month(m),year(y)
+{
+
 }
 
 int Date::getDay()
@@ -76,15 +73,13 @@ void Date::getSystemDate(int& day, int& month, int& year)
 	year = t.tm_year + 1900;
 }
 
-const string Date::dateToString(int day, int month, int year)
-{ //convert the date to a string in format (dd/mm/yyyy)
-	ostringstream os;
-	const char prev(os.fill('0'));
-	os << setw(2) << day << "/"
-		<< setw(2) << month << "/"
-		<< setw(4) << year;
-	os.fill(prev);
-	return os.str();
+string Date::dateToString(int day, int month, int year)
+{ //convert the date to a string in format (yyyy-mm-dd)
+	std::string os;
+	os = year + "-";
+	os += month + "-" + day;
+	
+	return os;
 }
 
 const string Date::getDate()
@@ -98,3 +93,20 @@ void Date::CurrentDate(int day, int month, int year)
 {
 
 }
+
+ostream& operator<<(ostream& os, const Date* t)
+{
+	os << t->year << "-";
+
+	if (t->month < 10)
+		os << "0";
+
+	os << t->month << "-";
+
+	if (t->day < 10)
+		os << "0";
+
+	os << t->day;
+
+	return os;
+};

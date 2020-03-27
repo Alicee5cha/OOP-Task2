@@ -8,6 +8,7 @@ using namespace std;
 class Date
 {
 public:
+	Date();
 	Date(string date);
 	Date(int day, int month, int year);
 	static void CurrentDate(int day, int month, int year);
@@ -28,11 +29,13 @@ public:
 	void getSystemDate(int& day, int& month, int& year);
 	//get date from system
 
-	const string dateToString(int day, int month, int year);
+	string dateToString(int day, int month, int year);
 	//convert the date to a string in format (dd/mm/yyyy)
 
 	const string getDate();
 	//return the current date in a string format
+
+	friend ostream& operator<<(ostream& os,const Date* t);
 
 private:
 	int day;

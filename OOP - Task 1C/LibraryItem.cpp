@@ -1,7 +1,6 @@
 #include "LibraryItem.h"
 #include "date.h"
-LibraryItem::LibraryItem(const std::string& date, Game* game)
-	: purchased(new Date(date)), game(game)
+LibraryItem::LibraryItem(Date* d, Game* game, int t): purchased(d), game(game),time(t)
 {
 }
 
