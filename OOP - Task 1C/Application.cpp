@@ -219,7 +219,7 @@ const void Application::Load()
 const void Application::Save()
 {
 	ofstream file;
-	file.open("testData.txt");
+	file.open("data.txt");
 
 	for (int i =0;i<store.games.length();i++)
 	{
