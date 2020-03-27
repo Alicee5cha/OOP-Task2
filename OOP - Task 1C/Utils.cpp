@@ -43,3 +43,15 @@ bool Utils::StartsWith(std::string fullText, std::string searchText)
         return true;
     return false;
 }
+
+Date* Utils::getCurrentDate()
+{
+        time_t now(time(0));
+        struct tm t;
+        localtime_s(&t, &now);
+        int day = t.tm_mday;
+        int month = t.tm_mon + 1;
+        int year = t.tm_year + 1900;
+
+        return new Date(day,month,year);
+}

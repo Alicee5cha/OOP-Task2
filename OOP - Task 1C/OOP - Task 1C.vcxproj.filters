@@ -49,6 +49,9 @@
     <ClCompile Include="LoginAccountMenu.cpp">
       <Filter>Code\Menus</Filter>
     </ClCompile>
+    <ClCompile Include="GameDetailsMenu.cpp">
+      <Filter>Code\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h">
@@ -97,6 +100,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="LoginAccountMenu.h">
+      <Filter>Headers\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDetailsMenu.h">
       <Filter>Headers\Menus</Filter>
     </ClInclude>
   </ItemGroup>

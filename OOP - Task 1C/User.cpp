@@ -29,6 +29,15 @@ const Date* User::GetDateMade() const
 const int User::GetCredit() const {
 	return credits;
 }
+const bool User::MinusCredits(const int amount) {
+	if (credits >= amount)
+	{
+		credits -= amount;
+		return true;
+	}
+	else
+		return false;
+}
 
 List<LibraryItem*>* User::getLibrary() {
 	return &library;

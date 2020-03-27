@@ -5,7 +5,7 @@
 class LibraryItem
 {
 	public:
-		LibraryItem(const std::string&, Game*);
+		LibraryItem(Date* , Game*,int);
 		~LibraryItem();
 		const Game* getGame()const;
 		const Date* purchasedDate() const;
@@ -13,5 +13,5 @@ class LibraryItem
 	private:
 		const Game *game;
 		const Date* purchased; 
-		double time;
+		int time;
 };

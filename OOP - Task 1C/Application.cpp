@@ -1,6 +1,8 @@
 #include "Application.h"
+#include "date.h"
 #include <fstream>
 #include <stdlib.h>
+
 using namespace std;
 Application::Application() : currentAccount(nullptr), currentUser(nullptr)
 {
@@ -162,7 +164,7 @@ const void Application::Load()
 										if (store.games[i]->GetId() == stoi(idL))
 										{
 											cGame = store.games[i];
-											LibraryItem* l = new LibraryItem(dateL, cGame);
+											LibraryItem* l = new LibraryItem(new Date(dateL), cGame,stoi(hoursL));
 											u->getLibrary()->addAtEnd(l);
 										}
 									}
@@ -191,7 +193,7 @@ const void Application::Load()
 										if (store.games[i]->GetId() == stoi(idL))
 										{
 											cGame = store.games[i];
-											LibraryItem* l = new LibraryItem(dateL, cGame);
+											LibraryItem* l = new LibraryItem(new Date(dateL), cGame, stoi(hoursL));
 											u->getLibrary()->addAtEnd(l);
 											break;
 										}
@@ -217,7 +219,7 @@ const void Application::Load()
 const void Application::Save()
 {
 	ofstream file;
-	file.open("data.txt");
+	file.open("testData.txt");
 
 	for (int i =0;i<store.games.length();i++)
 	{
@@ -268,3 +270,4 @@ const void Application::Save()
 	}
 }
 
+//TODO: Fix date class.
