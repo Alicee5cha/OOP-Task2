@@ -159,6 +159,7 @@
     <ClCompile Include="Store.cpp" />
     <ClCompile Include="StoreMenu.cpp" />
     <ClCompile Include="User.cpp" />
+    <ClCompile Include="UserProfile.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +176,7 @@
     <ClInclude Include="Store.h" />
     <ClInclude Include="StoreMenu.h" />
     <ClInclude Include="User.h" />
+    <ClInclude Include="UserProfile.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>

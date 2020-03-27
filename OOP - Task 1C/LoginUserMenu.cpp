@@ -1,4 +1,5 @@
 #include "LoginUserMenu.h"
+#include "MainMenu.h"
 
 LoginUserMenu::LoginUserMenu(const std::string& title, Application* app) : Menu(title, app)
 {
@@ -18,7 +19,7 @@ void LoginUserMenu::OutputOptions()
 
 bool LoginUserMenu::HandleChoice(char choice)
 {
-
+	std::string password = "";
 	// since we are using numbers here we shift the char down by '1'
 	// this puts '1' as 0, '2' as 1, '3' as 2, '4' as 3, etc.
 	// this reverses the + 1 above and lets us do the range check below
@@ -26,7 +27,16 @@ bool LoginUserMenu::HandleChoice(char choice)
 
 	if (index >= 0 && index < app->accounts.length())
 	{
-		std::cout << "Enter password for " + app->accounts[0]->users[index]->GetUsername() + ": ";
+		while (!(password == app->accounts[0]->users[index]->GetPass()))
+		{
+			std::cout << "Enter password for " + app->accounts[0]->users[index]->GetUsername() + ": ";
+			std::cin >> password;
+		}
+
+		app->LoginUser(app->accounts[0]->users[index]->GetUsername(), app->accounts[0]->users[index]->GetPass());
+		app->IsUserLoggedIn();
+		MainMenu("Menu", app);
+
 		//BlockingMessage("Not implemented, press return to continue");
 		//if password is correct go to user profile page
 	}

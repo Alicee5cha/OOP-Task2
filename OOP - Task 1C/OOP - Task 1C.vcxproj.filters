@@ -15,6 +15,7 @@
     <ClCompile Include="StoreMenu.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="UserProfile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
@@ -31,6 +32,7 @@
     <ClInclude Include="StoreMenu.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="UserProfile.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data.txt" />
