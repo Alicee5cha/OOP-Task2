@@ -165,7 +165,7 @@ const void Application::Load()
 										{
 											cGame = store.games[i];
 											LibraryItem* l = new LibraryItem(new Date(dateL), cGame,stoi(hoursL));
-											u->getLibrary()->addAtEnd(l);
+											u->getLibrary()->push_back(l);
 										}
 									}
 
@@ -194,7 +194,7 @@ const void Application::Load()
 										{
 											cGame = store.games[i];
 											LibraryItem* l = new LibraryItem(new Date(dateL), cGame, stoi(hoursL));
-											u->getLibrary()->addAtEnd(l);
+											u->getLibrary()->push_back(l);
 											break;
 										}
 									}
@@ -262,8 +262,8 @@ const void Application::Save()
 			file << cUser->GetPass() << endl;
 			file << cUser->GetCredit() << endl;
 
-			List<LibraryItem*> li = *cUser->getLibrary();
-			for (int lItem = 0; lItem < li.length(); lItem++)
+			vector<LibraryItem*> li = *cUser->getLibrary();
+			for (int lItem = 0; lItem < li.size(); lItem++)
 			{
 				file << "LIBRARY-ITEM" << endl;
 				file << li[lItem]->getGame()->GetId() << endl;

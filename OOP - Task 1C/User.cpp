@@ -39,6 +39,6 @@ const bool User::MinusCredits(const int amount) {
 		return false;
 }
 
-List<LibraryItem*>* User::getLibrary() {
+vector<LibraryItem*>* User::getLibrary() {
 	return &library;
 }
