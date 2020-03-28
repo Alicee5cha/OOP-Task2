@@ -12,23 +12,27 @@ void GameDetailsMenu::OutputOptions()
 	cout << "Age Rating: " << currentGame->GetAgeRat() << endl << endl;
 	if (app->IsUserLoggedIn())
 	{
-		List<LibraryItem*>* cUserLib = (app->GetCurrentUser()->getLibrary());
-		for (int i = 0; i < cUserLib->length(); i++)
+		List<LibraryItem*> cUserLib = *(app->GetCurrentUser()->getLibrary());
+		int i;
+		for (i = 0; i < cUserLib.length(); i++)
 		{
-			List<LibraryItem*> l = (cUserLib[i]);
-			if (l[i]->getGame() == currentGame)
+			if (cUserLib[i]->getGame() == currentGame)
 			{
-				cout << "Game purchased on: " << l[i]->purchasedDate() << endl;
+				cout << "Game purchased on: " << cUserLib[i]->purchasedDate() << endl;
 				break;
-			}
-
-			if (cUserLib->length() == i)
-			{
-				Option('P', "Purchase game: " + to_string(currentGame->GetCost()) +" credits");	
 			}
 		}
 
+		if (cUserLib.length() == i)
+		{
+			Option('P', "Purchase game: " + to_string(currentGame->GetCost()) + " credits");
+		}
+
 		
+	}
+	else
+	{
+		cout << "Price: " << to_string(currentGame->GetCost()) << " credits";
 	}
 }
 
@@ -38,23 +42,25 @@ bool GameDetailsMenu::HandleChoice(char choice)
 	{
 		if (app->IsUserLoggedIn())
 		{
-			List<LibraryItem*>* cUserLib = (app->GetCurrentUser()->getLibrary());
-			for (int i = 0; i < cUserLib->length(); i++)
+			List<LibraryItem*> cUserLib = *(app->GetCurrentUser()->getLibrary());
+			int i;
+			for (i = 0; i < cUserLib.length(); i++)
 			{
-				List<LibraryItem*> l = (cUserLib[i]);
-				if (l[i]->getGame() == currentGame)
+				if (cUserLib[i]->getGame() == currentGame)
 				{
 					break;
 				}
 
-				if (cUserLib->length() == i)
+			}
+			if (cUserLib.length() == i)
+			{
+				//Purchase game
+				if (app->GetCurrentUser()->MinusCredits(currentGame->GetCost()))
 				{
-					//Purchase game
-					return app->GetCurrentUser()->MinusCredits(currentGame->GetCost());
-					app->GetCurrentUser()->getLibrary()->addAtEnd(new LibraryItem(Utils::getCurrentDate(),currentGame,0));
+					app->GetCurrentUser()->getLibrary()->addAtEnd(new LibraryItem(Utils::getCurrentDate(), currentGame, 0));
+					return true;
 				}
 			}
-
 
 		}
 	}

@@ -219,7 +219,12 @@ const void Application::Load()
 const void Application::Save()
 {
 	ofstream file;
+#ifdef _DEBUG
+	file.open("tempData.txt");
+#else
 	file.open("data.txt");
+#endif // !_DEBUG
+
 
 	for (int i =0;i<store.games.length();i++)
 	{
