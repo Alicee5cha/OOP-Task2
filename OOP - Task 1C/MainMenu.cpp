@@ -66,8 +66,8 @@ bool MainMenu::HandleChoice(char choice)
 
 		case 'P':
 		{
-      UserProfile(app->GetCurrentUser()->GetUsername() + "'S PROFILE", app);
-		  //go to proflie page
+			UserProfile(app->GetCurrentUser()->GetUsername() + "'S PROFILE", app);
+			//go to proflie page
 		} break;
 	}
 

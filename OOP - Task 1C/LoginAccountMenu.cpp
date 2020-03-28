@@ -1,4 +1,5 @@
 #include "LoginAccountMenu.h"
+#include "MainMenu.h"
 
 LoginAccountMenu::LoginAccountMenu(const std::string& title, Application* app) : Menu(title, app)
 {
@@ -32,8 +33,11 @@ bool LoginAccountMenu::HandleChoice(char choice)
 		std::string pass;
 		cin >> pass;
 		if (app->LoginAccount(cAcc->GetEmail(), pass))
-			//TODO: go to user profile page	
-			;
+		{
+			UserProfile(app->GetCurrentUser()->GetUsername() + "'S PROFILE", app);
+			//go to proflie page
+		}
+
 		return true;
 	}
 	return false;

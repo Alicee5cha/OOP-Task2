@@ -1,4 +1,5 @@
 #include "UserProfile.h"
+#include "MainMenu.h"
 
 UserProfile::UserProfile(const std::string& title, Application* app) : Menu(title, app)
 {
@@ -39,17 +40,17 @@ bool UserProfile::HandleChoice(char choice)
 	{
 	case 'I':
 	{
-		app->GetCurrentUser()->GetCredit() + 1;
+		//app->GetCurrentUser()->GetCredit() + 1;
 		break;
 	}
 	case 'O':
 	{
-		app->GetCurrentUser()->GetCredit() + 10;
+		//app->GetCurrentUser()->GetCredit() + 10;
 		break;
 	}
 	case 'P':
 	{
-		app->GetCurrentUser()->GetCredit() + 100;
+		//app->GetCurrentUser()->GetCredit() + 100;
 		break;
 	}
 	case 'A':
