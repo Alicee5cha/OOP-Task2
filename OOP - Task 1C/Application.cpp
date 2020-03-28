@@ -18,7 +18,6 @@ Application::~Application()
 	}
 }
 
-
 bool Application::IsUserLoggedIn() const
 {
 	return currentUser != nullptr;
@@ -56,12 +55,6 @@ const bool Application::LoginAccount(const std::string& email, const std::string
 			}
 	}
 	return false;
-}
-
-const void Application::LogoutAccount()
-{
-	LogoutUser();
-	currentAccount = nullptr;
 }
 
 const bool Application::LoginUser(const std::string& username, const std::string& password)

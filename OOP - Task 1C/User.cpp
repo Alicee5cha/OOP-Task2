@@ -26,7 +26,8 @@ const Date* User::GetDateMade() const
 {
 	return created;
 }
-const int User::GetCredit() const {
+const int User::GetCredit() const 
+{
 	return credits;
 }
 const bool User::MinusCredits(const int amount) {

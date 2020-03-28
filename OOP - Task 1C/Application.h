@@ -17,7 +17,7 @@ class Application
 		User* GetCurrentUser() const;
 
 		Store& GetStore();
-
+  
 		const bool LoginAccount(const std::string& email, const std::string& password);
 		const void LogoutAccount();
 		const bool LoginUser(const std::string& username, const std::string& password);

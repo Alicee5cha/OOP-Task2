@@ -2,6 +2,7 @@
 
 #include "Menu.h"
 #include "StoreMenu.h"
+#include "UserProfile.h"
 #include "LoginUserMenu.h"
 #include "LoginAccountMenu.h"
 
