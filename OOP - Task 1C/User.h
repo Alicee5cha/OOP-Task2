@@ -4,6 +4,7 @@
 #include "LibraryItem.h"
 #include "ListT.h"
 #include "date.h"
+#include <vector>
 
 class User
 {
@@ -14,12 +15,12 @@ class User
 		const std::string& GetPass() const;
 		const Date* GetDateMade() const;
 		const int GetCredit()const;
-		List<LibraryItem*>* getLibrary();
+		vector<LibraryItem*>* getLibrary();
 		const bool User::MinusCredits(const int amount);
 	private:
 		std::string username;
 		std::string password;
 		Date* created; 
 		int credits;
-		List<LibraryItem*> library = { };
+		vector<LibraryItem*> library = { };
 };
