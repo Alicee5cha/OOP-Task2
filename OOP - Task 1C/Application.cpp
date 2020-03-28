@@ -16,7 +16,6 @@ Application::~Application()
 	}
 }
 
-
 bool Application::IsUserLoggedIn() const
 {
 	return currentUser != nullptr;
@@ -50,10 +49,11 @@ bool Application::LoginAccount(const std::string& email, const std::string& pass
 	return true;
 }
 
-bool Application::LoginUser(const std::string& username, const std::string& password)
+bool Application::LoginUser(const std::string& username, const std::string& password, int& i)
 {
-	// TODO: This currently always logs you in as the first user
-	currentUser = currentAccount->users[0];
+	currentAccount->users[i];
+	// TODO: Null pointer exception when this runs
+	currentUser = currentAccount->users[i];
 
 	return true;
 }

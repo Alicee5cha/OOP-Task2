@@ -10,36 +10,45 @@ void LoginUserMenu::OutputOptions()
 {
 	if (!app->IsUserLoggedIn())
 	{
-		for (int i = 0; i < app->accounts[0]->users.length(); i++)
+		for (int i = 0; i < app->GetCurrentAccount()->users.length(); i++)
 		{
-			std::cout << "  " << (i + 1) << ") " << (app->accounts[0]->users[i]->GetUsername()) << '\n';
+			Option(i + 1, app->GetCurrentAccount()->users[i]->GetUsername());
 		}
 	}
 }
 
 bool LoginUserMenu::HandleChoice(char choice)
 {
-	std::string password = "";
 	// since we are using numbers here we shift the char down by '1'
 	// this puts '1' as 0, '2' as 1, '3' as 2, '4' as 3, etc.
 	// this reverses the + 1 above and lets us do the range check below
 	int index = choice - '1';
 
-	if (index >= 0 && index < app->accounts.length())
+	while ((index < app->GetCurrentAccount()->users.length()) && index >= 0) //greater than 0, less than the number of users in the list
 	{
-		while (!(password == app->accounts[0]->users[index]->GetPass()))
-		{
-			std::cout << "Enter password for " + app->accounts[0]->users[index]->GetUsername() + ": ";
-			std::cin >> password;
-		}
+		std::string password;
 
-		app->LoginUser(app->accounts[0]->users[index]->GetUsername(), app->accounts[0]->users[index]->GetPass());
-		app->IsUserLoggedIn();
-		MainMenu("Menu", app);
+			while ((password.empty())) //if cin is empty, try again
+			{	
+				std::cout << "Enter password for " + app->GetCurrentAccount()->users[index]->GetUsername() + ": ";
+				getline(std::cin, password);
+			}
 
-		//BlockingMessage("Not implemented, press return to continue");
-		//if password is correct go to user profile page
+			while (!(password == app->GetCurrentAccount()->users[index]->GetPass())) //if cin password doesnt match stored password, try again
+			{
+				std::cout << "Wrong password, try again: ";
+				getline(std::cin, password);
+			}
+
+			std::cout << "Login successful";
+			app->LoginUser(app->GetCurrentAccount()->users[index]->GetUsername(), app->GetCurrentAccount()->users[index]->GetPass(), index);
+
+			MainMenu("MENU", app);
+			//if password is correct go to main menu
+
 	}
+		std::cout << "Select a valid user";
+
 
 	return false;
 

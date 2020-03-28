@@ -58,7 +58,7 @@ alice@shu.com
 password
 ACCOUNT-PLAYER
 2017-09-19
-Bob
+Alice
 password
 1000
 ACCOUNT-PLAYER

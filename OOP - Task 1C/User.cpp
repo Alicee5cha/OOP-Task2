@@ -25,10 +25,11 @@ const std::string& User::GetDateMade() const
 {
 	return created;
 }
-const int User::GetCredit() const {
+const int User::GetCredit() const 
+{
 	return credits;
 }
-
-List<LibraryItem*> User::getLibrary() {
+List<LibraryItem*> User::getLibrary() 
+{
 	return library;
 }
