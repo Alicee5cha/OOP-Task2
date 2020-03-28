@@ -34,6 +34,7 @@ bool LoginAccountMenu::HandleChoice(char choice)
 		if (app->LoginAccount(cAcc->GetEmail(), pass))
 			//TODO: go to user profile page	
 			;
+		return true;
 	}
 	return false;
 }
