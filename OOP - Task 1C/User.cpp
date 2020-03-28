@@ -1,8 +1,9 @@
 #include "User.h"
 
-User::User(const std::string& username, const std::string& password, const std::string& created, int cred)
-	: username(username), password(password), created(created), credits(cred)
+User::User(const std::string& username, const std::string& password, const std::string& date, int cred)
+	: username(username), password(password), credits(cred)
 {
+	created = new Date(date);
 }
 
 User::~User()
@@ -21,7 +22,7 @@ const std::string& User::GetPass() const
 {
 	return password;
 }
-const std::string& User::GetDateMade() const
+const Date* User::GetDateMade() const
 {
 	return created;
 }
@@ -29,7 +30,16 @@ const int User::GetCredit() const
 {
 	return credits;
 }
-List<LibraryItem*> User::getLibrary() 
-{
-	return library;
+const bool User::MinusCredits(const int amount) {
+	if (credits >= amount)
+	{
+		credits -= amount;
+		return true;
+	}
+	else
+		return false;
+}
+
+vector<LibraryItem*>* User::getLibrary() {
+	return &library;
 }
