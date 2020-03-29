@@ -57,6 +57,12 @@ const bool Application::LoginAccount(const std::string& email, const std::string
 	return false;
 }
 
+const void Application::LogoutAccount()
+{
+	LogoutUser();
+	currentAccount = nullptr;
+}
+
 const bool Application::LoginUser(const std::string& username, const std::string& password)
 {
 	for (int i=0;i<currentAccount->users.length();i++)
