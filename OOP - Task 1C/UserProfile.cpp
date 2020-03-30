@@ -1,5 +1,4 @@
 #include "UserProfile.h"
-#include "MainMenu.h"
 
 UserProfile::UserProfile(const std::string& title, Application* app) : Menu(title, app)
 {
@@ -9,21 +8,24 @@ UserProfile::UserProfile(const std::string& title, Application* app) : Menu(titl
 void UserProfile::OutputOptions()
 {
 	//TODO: add actual number of credits
-	std::cout << "Credits:" + app->GetCurrentUser()->GetCredit();
-	
+	string cred = "";
+	cred = to_string(app->GetCurrentUser()->GetCredit());
+	std::cout << "Credits:" + cred + "\n";
+
 	Option('I', "Purchase 1 credit");
 	Option('O', "Purchase 10 credits");
 	Option('P', "Purchase 100 credits");
 	std::cout << "\n";
 	std::cout << "GAMES";
+	std::cout << "\n";
 
 	//TODO: output games purchased
-	//for (int i = 0; i < app->GetCurrentUser()->getLibrary().length(); i++)
-	//{
-	//	// adding 1 so the display is nicer for the user
-	//	Option(i + 1, app->GetCurrentUser()->getLibrary().);
-	//}
-
+	for (int i = 0; i < app->GetCurrentUser()->getLibrary()->size(); i++)
+	{
+		string gameName = app->GetCurrentUser()->getLibrary()->at(i)->getGame()->GetName();
+		// adding 1 so the display is nicer for the user
+		Option(i + 1, gameName);
+	}
 
 	if (typeid(app->GetCurrentUser) == typeid(Admin*))
 	{
@@ -40,17 +42,17 @@ bool UserProfile::HandleChoice(char choice)
 	{
 	case 'I':
 	{
-		//app->GetCurrentUser()->GetCredit() + 1;
+		app->GetCurrentUser()->AddCredit(1);
 		break;
 	}
 	case 'O':
 	{
-		//app->GetCurrentUser()->GetCredit() + 10;
+		app->GetCurrentUser()->AddCredit(10);
 		break;
 	}
 	case 'P':
 	{
-		//app->GetCurrentUser()->GetCredit() + 100;
+		app->GetCurrentUser()->AddCredit(100);
 		break;
 	}
 	case 'A':
