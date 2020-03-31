@@ -14,15 +14,14 @@ void UserProfile::OutputOptions()
 	Option('O', "Purchase 10 credits");
 	Option('P', "Purchase 100 credits");
 	std::cout << "\n";
-	std::cout << "GAMES";
+	std::cout << "GAMES" << endl;
 
-	//TODO: output games purchased
-	//for (int i = 0; i < app->GetCurrentUser()->getLibrary().length(); i++)
-	//{
-	//	// adding 1 so the display is nicer for the user
-	//	Option(i + 1, app->GetCurrentUser()->getLibrary().);
-	//}
-
+	for (int i = 0; i < app->GetCurrentUser()->getLibrary()->size(); i++)
+	{
+		const string currentGame = (*app->GetCurrentUser()->getLibrary()).at(i)->getGame()->GetName();
+		// adding 1 so the display is nicer for the user
+		Option(i + 1, currentGame);
+	}
 
 	if (typeid(app->GetCurrentUser) == typeid(Admin*))
 	{
