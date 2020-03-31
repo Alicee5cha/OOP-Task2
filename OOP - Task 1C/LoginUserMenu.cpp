@@ -42,7 +42,7 @@ bool LoginUserMenu::HandleChoice(char choice)
 			}
 
 			std::cout << "Login successful";
-      if (app->LoginUser(cAcc->GetUsername(),password))
+      if (app->LoginUser(cUser->GetUsername(),password))
       {
         	MainMenu("MENU", app);
 			    //if password is correct go to main menu
