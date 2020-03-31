@@ -23,7 +23,7 @@ bool LoginUserMenu::HandleChoice(char choice)
 	// this puts '1' as 0, '2' as 1, '3' as 2, '4' as 3, etc.
 	// this reverses the + 1 above and lets us do the range check below
 	int index = choice - '1';
-  const User* cAcc = app->GetCurrentAccount()->users[index];
+  const User* cUser = app->GetCurrentAccount()->users[index];
 
 	while (index >= 0 && index < app->GetCurrentAccount()->users.length()) //greater than 0, less than the number of users in the list
 	{
@@ -31,11 +31,11 @@ bool LoginUserMenu::HandleChoice(char choice)
 
 			while ((password.empty())) //if cin is empty, try again
 			{	
-				std::cout << "Enter password for " + cAcc->GetUsername() + ": ";
+				std::cout << "Enter password for " + cUser->GetUsername() + ": ";
 				getline(std::cin, password);
 			}
 
-			while (!(password == app->GetCurrentAccount()->users[index]->GetPass())) //if cin password doesnt match stored password, try again
+			while (!(password == cUser->GetPass())) //if cin password doesnt match stored password, try again
 			{
 				std::cout << "Wrong password, try again: ";
 				getline(std::cin, password);
@@ -49,6 +49,6 @@ bool LoginUserMenu::HandleChoice(char choice)
           return true;
       }
 	}
-		std::cout << "Select a valid user";	
+
 return false;
 }

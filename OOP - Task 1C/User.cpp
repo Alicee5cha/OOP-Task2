@@ -30,6 +30,10 @@ const int User::GetCredit() const
 {
 	return credits;
 }
+int User::AddCredit(int cred)
+{
+	return credits += cred;
+}
 const bool User::MinusCredits(const int amount) {
 	if (credits >= amount)
 	{

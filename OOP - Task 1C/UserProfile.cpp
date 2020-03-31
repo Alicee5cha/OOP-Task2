@@ -1,4 +1,5 @@
 #include "UserProfile.h"
+#include "GameDetailsMenu.h"
 
 UserProfile::UserProfile(const std::string& title, Application* app) : Menu(title, app)
 {
@@ -7,22 +8,23 @@ UserProfile::UserProfile(const std::string& title, Application* app) : Menu(titl
 
 void UserProfile::OutputOptions()
 {
-	//TODO: add actual number of credits
-	std::cout << "Credits:" + app->GetCurrentUser()->GetCredit();
-	
+	std::string cred = to_string(app->GetCurrentUser()->GetCredit());
+	std::cout << "Credits:" + cred + "\n\n";
+
 	Option('I', "Purchase 1 credit");
 	Option('O', "Purchase 10 credits");
 	Option('P', "Purchase 100 credits");
 	std::cout << "\n";
 	std::cout << "GAMES";
+	std::cout << "\n";
 
 	//TODO: output games purchased
-	//for (int i = 0; i < app->GetCurrentUser()->getLibrary().length(); i++)
-	//{
-	//	// adding 1 so the display is nicer for the user
-	//	Option(i + 1, app->GetCurrentUser()->getLibrary().);
-	//}
-
+	for (int i = 0; i < app->GetCurrentUser()->getLibrary()->size(); i++)
+	{
+		string gameName = app->GetCurrentUser()->getLibrary()->at(i)->getGame()->GetName();
+		// adding 1 so the display is nicer for the user
+		Option(i + 1, gameName);
+	}
 
 	if (typeid(app->GetCurrentUser) == typeid(Admin*))
 	{
@@ -35,21 +37,34 @@ void UserProfile::OutputOptions()
 
 bool UserProfile::HandleChoice(char choice)
 {
+// since we are using numbers here we shift the char down by '1'
+// this puts '1' as 0, '2' as 1, '3' as 2, '4' as 3, etc.
+// this reverses the + 1 above and lets us do the range check below
+	int index = choice - '1';
+
+	if (index >= 0 && index < app->GetCurrentUser()->getLibrary()->size())
+	{
+		//TODO: game details menu, game should be const but is not when called from the GetLibrary function
+		//Game* gameObj = app->GetCurrentUser()->getLibrary()->at(index)->getGame();
+		//GameDetailsMenu(Utils::ToUpperI(app->GetCurrentUser()->getLibrary()->at(index)->getGame()->GetName()).c_str(), app, gameObj);
+			return true;
+	}
+
 	switch (choice)
 	{
 	case 'I':
 	{
-		app->GetCurrentUser()->GetCredit() + 1;
+		app->GetCurrentUser()->AddCredit(1);
 		break;
 	}
 	case 'O':
 	{
-		app->GetCurrentUser()->GetCredit() + 10;
+		app->GetCurrentUser()->AddCredit(10);
 		break;
 	}
 	case 'P':
 	{
-		app->GetCurrentUser()->GetCredit() + 100;
+		app->GetCurrentUser()->AddCredit(100);
 		break;
 	}
 	case 'A':

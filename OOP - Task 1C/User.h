@@ -17,6 +17,7 @@ class User
 		const int GetCredit()const;
 		vector<LibraryItem*>* getLibrary();
 		const bool User::MinusCredits(const int amount);
+		int User::AddCredit(int cred);
 	private:
 		std::string username;
 		std::string password;
