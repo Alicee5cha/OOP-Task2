@@ -1,6 +1,6 @@
 #include "GameDetailsMenu.h"
 
-GameDetailsMenu::GameDetailsMenu(const char* title, Application* app, Game* game):Menu(title,app),currentGame(game)
+GameDetailsMenu::GameDetailsMenu(const char* title, Application* app, const Game* game): Menu(title,app), currentGame(game)
 {
 	Paint();//Required here
 }

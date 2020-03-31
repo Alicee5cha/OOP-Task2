@@ -18,7 +18,6 @@ void UserProfile::OutputOptions()
 	std::cout << "GAMES";
 	std::cout << "\n";
 
-	//TODO: output games purchased
 	for (int i = 0; i < app->GetCurrentUser()->getLibrary()->size(); i++)
 	{
 		string gameName = app->GetCurrentUser()->getLibrary()->at(i)->getGame()->GetName();
@@ -26,9 +25,13 @@ void UserProfile::OutputOptions()
 		Option(i + 1, gameName);
 	}
 
-	if (typeid(app->GetCurrentUser) == typeid(Admin*))
+	User* cUser = app->GetCurrentUser();
+
+	if (typeid(*cUser) == typeid(Admin))
 	{
+		std::cout << "\n";
 		std::cout << "ADMINISTRATOR";
+		std::cout << "\n";
 		Option('A', "Add new user");
 		Option('R', "Remove user");
 		Option('G', "Guest per-game access");
@@ -44,9 +47,8 @@ bool UserProfile::HandleChoice(char choice)
 
 	if (index >= 0 && index < app->GetCurrentUser()->getLibrary()->size())
 	{
-		//TODO: game details menu, game should be const but is not when called from the GetLibrary function
-		//Game* gameObj = app->GetCurrentUser()->getLibrary()->at(index)->getGame();
-		//GameDetailsMenu(Utils::ToUpperI(app->GetCurrentUser()->getLibrary()->at(index)->getGame()->GetName()).c_str(), app, gameObj);
+		const Game* gameObj = app->GetCurrentUser()->getLibrary()->at(index)->getGame();
+		GameDetailsMenu(Utils::ToUpperI(app->GetCurrentUser()->getLibrary()->at(index)->getGame()->GetName()).c_str(), app, gameObj);
 			return true;
 	}
 

@@ -35,12 +35,12 @@ bool LoginAccountMenu::HandleChoice(char choice)
 		{
 			std::cout << "Enter password for " + cAcc->GetEmail() + ": ";
 			getline(std::cin, password);
-		}
 
-		while (!(password == cAcc->GetPass())) //if cin password doesnt match stored password, try again
-		{
-			std::cout << "Wrong password, try again: ";
-			getline(std::cin, password);
+			while (!(password == cAcc->GetPass())) //if cin password doesnt match stored password, try again
+			{
+				std::cout << "Wrong password, try again: ";
+				getline(std::cin, password);
+			}
 		}
 
 		std::cout << "Login successful";
