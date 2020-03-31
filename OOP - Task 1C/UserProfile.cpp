@@ -1,4 +1,5 @@
 #include "UserProfile.h"
+#include "GameDetailsMenu.h"
 
 UserProfile::UserProfile(const std::string& title, Application* app) : Menu(title, app)
 {
@@ -7,10 +8,8 @@ UserProfile::UserProfile(const std::string& title, Application* app) : Menu(titl
 
 void UserProfile::OutputOptions()
 {
-	//TODO: add actual number of credits
-	string cred = "";
-	cred = to_string(app->GetCurrentUser()->GetCredit());
-	std::cout << "Credits:" + cred + "\n";
+	std::string cred = to_string(app->GetCurrentUser()->GetCredit());
+	std::cout << "Credits:" + cred + "\n\n";
 
 	Option('I', "Purchase 1 credit");
 	Option('O', "Purchase 10 credits");
@@ -38,6 +37,19 @@ void UserProfile::OutputOptions()
 
 bool UserProfile::HandleChoice(char choice)
 {
+// since we are using numbers here we shift the char down by '1'
+// this puts '1' as 0, '2' as 1, '3' as 2, '4' as 3, etc.
+// this reverses the + 1 above and lets us do the range check below
+	int index = choice - '1';
+
+	if (index >= 0 && index < app->GetCurrentUser()->getLibrary()->size())
+	{
+		//TODO: game details menu, game should be const but is not when called from the GetLibrary function
+		//Game* gameObj = app->GetCurrentUser()->getLibrary()->at(index)->getGame();
+		//GameDetailsMenu(Utils::ToUpperI(app->GetCurrentUser()->getLibrary()->at(index)->getGame()->GetName()).c_str(), app, gameObj);
+			return true;
+	}
+
 	switch (choice)
 	{
 	case 'I':

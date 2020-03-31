@@ -23,7 +23,7 @@ bool StoreMenu::HandleChoice(char choice)
 
 	if (index >= 0 && index < app->GetStore().games.length())
 	{
-		GameDetailsMenu(Utils::ToUpperI(app->GetStore().games[index]->GetName()).c_str(),app,app->GetStore().games[index]);
+		GameDetailsMenu(Utils::ToUpperI(app->GetStore().games[index]->GetName()).c_str(), app, app->GetStore().games[index]);
 	}
 
 	return false;
