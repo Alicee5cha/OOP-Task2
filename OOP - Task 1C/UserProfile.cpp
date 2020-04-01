@@ -1,9 +1,33 @@
 #include "UserProfile.h"
 #include "GameDetailsMenu.h"
-
+#include <algorithm>
 UserProfile::UserProfile(const std::string& title, Application* app) : Menu(title, app)
 {
 	Paint(); // required in constructor
+}
+
+
+bool sortName(LibraryItem* a, LibraryItem* b) {
+	return (a->getGame()->GetName().compare(b->getGame()->GetName())) < 0;
+}
+
+bool sortDate(LibraryItem* a, LibraryItem* b) {
+	//Years
+	if (a->purchasedDate()->getYear() < b->purchasedDate()->getYear())
+		return true;
+	else
+		if (a->purchasedDate()->getYear() == b->purchasedDate()->getYear()) {
+			//Months
+			if (a->purchasedDate()->getMonth() < b->purchasedDate()->getMonth())
+				return true;
+			else
+				if (a->purchasedDate()->getMonth() == b->purchasedDate()->getMonth()){
+					//Days
+					if (a->purchasedDate()->getDay() < b->purchasedDate()->getDay())
+						return true;
+				}
+		}
+	return false;
 }
 
 void UserProfile::OutputOptions()
@@ -24,6 +48,9 @@ void UserProfile::OutputOptions()
 		// adding 1 so the display is nicer for the user
 		Option(i + 1, gameName);
 	}
+
+	Option('N', "Sort library by name.");
+	Option('D', "Sort by date.");
 
 	User* cUser = app->GetCurrentUser();
 
@@ -54,33 +81,43 @@ bool UserProfile::HandleChoice(char choice)
 
 	switch (choice)
 	{
-	case 'I':
-	{
-		app->GetCurrentUser()->AddCredit(1);
-		break;
-	}
-	case 'O':
-	{
-		app->GetCurrentUser()->AddCredit(10);
-		break;
-	}
-	case 'P':
-	{
-		app->GetCurrentUser()->AddCredit(100);
-		break;
-	}
-	case 'A':
-	{
-		break;
-	}
-	case 'R':
-	{
-		break;
-	}
-	case 'G':
-	{
-		break;
-	}
+		case 'I':
+		{
+			app->GetCurrentUser()->AddCredit(1);
+			break;
+		}
+		case 'O':
+		{
+			app->GetCurrentUser()->AddCredit(10);
+			break;
+		}
+		case 'P':
+		{
+			app->GetCurrentUser()->AddCredit(100);
+			break;
+		}
+		case 'A':
+		{
+			break;
+		}
+		case 'R':
+		{
+			break;
+		}
+		case 'G':
+		{
+			break;
+		}
+		case 'N':
+		{
+			sort(app->GetCurrentUser()->getLibrary()->begin(), app->GetCurrentUser()->getLibrary()->end(),sortName);
+			break;
+		}
+		case 'D':
+		{
+			sort(app->GetCurrentUser()->getLibrary()->begin(), app->GetCurrentUser()->getLibrary()->end(),sortDate);
+			break;
+		}
 	}
 
 	return false;
