@@ -25,32 +25,50 @@ bool LoginAccountMenu::HandleChoice(char choice)
 // this puts '1' as 0, '2' as 1, '3' as 2, '4' as 3, etc.
 // this reverses the + 1 above and lets us do the range check below
 	int index = choice - '1';
-	const Account* cAcc = app->accounts[index];
+	std::string password;
 
-	while ((index >= 0 && index < app->accounts.length())) //greater than 0, less than the number of accounts in the list
+	//while ((index >= 0 && index < app->accounts.length())) //greater than 0, less than the number of accounts in the list
+	//{
+	//	const Account* cAcc = app->accounts[index];
+
+	//	while ((password.empty())) //if cin is empty, try again
+	//	{
+	//		std::cout << "Enter password for " + cAcc->GetEmail() + ": ";
+	//		getline(std::cin, password);
+
+	//		while (!(password == cAcc->GetPass())) //if cin password doesnt match stored password, try again
+	//		{
+	//			std::cout << "Wrong password, try again: ";
+	//			getline(std::cin, password);
+	//		}
+	//	}
+
+	//	std::cout << "Login successful";
+	//	if (app->LoginAccount(cAcc->GetEmail(), password))
+	//	{
+	//		//if password is correct go back to main menu
+	//		return true;
+	//	}
+	//}
+		
+	//New
+	if (index >= 0 && index < app->accounts.length())
 	{
-		std::string password;
+		const Account* cAcc = app->accounts[index];
+		std::cout << "Enter password for " + app->accounts[index]->GetEmail() + ": ";
+		getline(std::cin, password);
 
-		while ((password.empty())) //if cin is empty, try again
+		if (app->LoginAccount(cAcc->GetEmail(), password))	
 		{
-			std::cout << "Enter password for " + cAcc->GetEmail() + ": ";
-			getline(std::cin, password);
-
-			while (!(password == cAcc->GetPass())) //if cin password doesnt match stored password, try again
-			{
-				std::cout << "Wrong password, try again: ";
-				getline(std::cin, password);
-			}
-		}
-
-		std::cout << "Login successful";
-		if (app->LoginAccount(cAcc->GetEmail(), password))
-		{
-			MainMenu("MENU", app);
-			//if password is correct go to main menu
+			//if password is correct go back to main menu
 			return true;
 		}
+		else
+		{
+			cout << "\n\tPassword incorrect. Please try again or select another user.";
+			cout << "\n\tPress any key to continue.";
+			_getwch();//Wait for user input before continuing. This functions return value is ignored on purpose.
+		}
 	}
-
 	return false;
 }

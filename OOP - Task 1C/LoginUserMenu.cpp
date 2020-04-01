@@ -24,29 +24,50 @@ bool LoginUserMenu::HandleChoice(char choice)
 	// this reverses the + 1 above and lets us do the range check below
 	int index = choice - '1';
 	std::string password;
-	const User* cUser = app->GetCurrentAccount()->users[index];
 
-	while (index >= 0 && index < app->GetCurrentAccount()->users.length()) //greater than 0, less than the number of users in the list
+
+	////OLD
+	//while (index >= 0 && index < app->GetCurrentAccount()->users.length()) //greater than 0, less than the number of users in the list
+	//{
+	//		while ((password.empty())) //if cin is empty, try again
+	//		{	
+	//			std::cout << "Enter password for " + cUser->GetUsername() + ": ";
+	//			getline(std::cin, password);
+	//		}
+
+	//		while (!(password == cUser->GetPass())) //if cin password doesnt match stored password, try again
+	//		{
+	//			std::cout << "Wrong password, try again: ";
+	//			getline(std::cin, password);
+	//		}
+
+	//		if (app->LoginUser(cUser->GetUsername(), password))
+	//		{
+	//			//if password is correct go back to main menu
+	//			return true;
+	//		}
+	//		else
+	//			cout << "\n\tPassword incorrect.";
+	//}
+
+	//New
+	if (index >= 0 && index < app->GetCurrentAccount()->users.length())
 	{
-			while ((password.empty())) //if cin is empty, try again
-			{	
-				std::cout << "Enter password for " + cUser->GetUsername() + ": ";
-				getline(std::cin, password);
-			}
+		const User* cUser = app->GetCurrentAccount()->users[index];
+		std::cout << "Enter password for " + cUser->GetUsername() + ": ";	
+		getline(std::cin, password);										
 
-			while (!(password == cUser->GetPass())) //if cin password doesnt match stored password, try again
-			{
-				std::cout << "Wrong password, try again: ";
-				getline(std::cin, password);
-			}
-
-      if (app->LoginUser(cUser->GetUsername(),password))
-      {
-        	MainMenu("MENU", app);
-			    //if password is correct go to main menu
-          return true;
-      }
+		if (app->LoginUser(cUser->GetUsername(), password))
+		{
+			//if password is correct go back to main menu
+			return true;
+		}
+		else
+		{
+			cout << "\n\tPassword incorrect. Please try again or select another user.";
+			cout << "\n\tPress any key to continue.";
+			_getwch();//Wait for user input before continuing. This functions return value is ignored on purpose.
+		}
 	}
-
 return false;
 }
