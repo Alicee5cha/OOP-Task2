@@ -76,7 +76,6 @@ bool UserProfile::HandleChoice(char choice)
 	{
 		const Game* gameObj = app->GetCurrentUser()->getLibrary()->at(index)->getGame();
 		GameDetailsMenu(Utils::ToUpperI(app->GetCurrentUser()->getLibrary()->at(index)->getGame()->GetName()).c_str(), app, gameObj);
-			return true;
 	}
 
 	switch (choice)

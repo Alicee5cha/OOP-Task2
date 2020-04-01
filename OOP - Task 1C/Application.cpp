@@ -73,6 +73,7 @@ const bool Application::LoginUser(const std::string& username, const std::string
 				currentUser = currentAccount->users[i];
 				return true;
 			}
+			
 	}
 	return false;
 }

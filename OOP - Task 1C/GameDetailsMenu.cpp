@@ -67,7 +67,6 @@ bool GameDetailsMenu::HandleChoice(char choice)
 					if (app->GetCurrentUser()->MinusCredits(currentGame->GetCost()))
 					{
 						app->GetCurrentUser()->getLibrary()->push_back(new LibraryItem(Utils::getCurrentDate(), currentGame, 0));
-						return true;
 					}
 				}
 			}
