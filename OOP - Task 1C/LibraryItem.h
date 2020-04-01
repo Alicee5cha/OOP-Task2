@@ -10,6 +10,7 @@ class LibraryItem
 		const Game* getGame() const;
 		const Date* purchasedDate() const;
 		const double getTime() const;
+		const void addTime();
 	private:
 		const Game *game;
 		const Date* purchased; 

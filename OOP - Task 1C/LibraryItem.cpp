@@ -19,3 +19,7 @@ const Date* LibraryItem::purchasedDate() const {
 const double LibraryItem::getTime() const {
 	return time;
 }
+
+const void LibraryItem::addTime() {
+	time += rand() % 60 + 10;
+}
