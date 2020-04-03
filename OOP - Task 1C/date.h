@@ -11,11 +11,9 @@ public:
 	Date();
 	Date(string date);
 	Date(int day, int month, int year);
-	static void CurrentDate(int day, int month, int year);
-	int getDay();
-	int getMonth();
-	int getYear();
-	~Date();
+	const int getDay() const;
+	const int getMonth() const;
+	const int getYear() const;
 
 	void getSystemTime(int& hrs, int& mins, int& secs);
 	//get time from system

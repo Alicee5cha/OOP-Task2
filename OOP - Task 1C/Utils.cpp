@@ -55,3 +55,25 @@ Date* Utils::getCurrentDate()
 
         return new Date(day,month,year);
 }
+//Return a number between min and max, inclusive.
+int Utils::randomInt(int min, int max) {
+    return (min + rand() % (max + 1 - min));
+}
+//Returns time formatted
+string Utils::ReturnPlayTime(int timeInMinutes)
+{
+    string os;
+
+    if (timeInMinutes < 60)                 //Minutes
+        os = timeInMinutes + " minutes.";
+    else if (timeInMinutes < 300)           //Hours.minutes
+    {
+        string t = to_string( ((float)timeInMinutes / 60.0f));
+        t = t.substr(0, t.find('.') + 2);
+        os = t + " hours.";
+    }
+    else                                    //Just Hours
+        os = to_string(timeInMinutes / 60) + " hours."; 
+
+    return os;
+}

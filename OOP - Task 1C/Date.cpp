@@ -21,15 +21,15 @@ Date::Date(int d, int m, int y):day(d),month(m),year(y)
 
 }
 
-int Date::getDay()
+const int Date::getDay() const
 {
 	return day;
 }
-int Date::getMonth()
+const int Date::getMonth() const 
 {
 	return month;
 }
-int Date::getYear()
+const int Date::getYear() const 
 {
 	return year;
 }
@@ -89,10 +89,6 @@ const string Date::getDate()
 	return dateToString(day, month, year);
 }
 
-void Date::CurrentDate(int day, int month, int year)
-{
-
-}
 
 ostream& operator<<(ostream& os, const Date* t)
 {

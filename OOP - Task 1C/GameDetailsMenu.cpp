@@ -19,6 +19,10 @@ void GameDetailsMenu::OutputOptions()
 			if (cUserLib[i]->getGame() == currentGame)
 			{
 				cout << "Game purchased on: " << cUserLib[i]->purchasedDate() << endl;
+				Option('P',"Play game!");
+				
+				std::cout << "Total Time: " + Utils::ReturnPlayTime(cUserLib[i]->getTime()) << endl;
+
 				break;
 			}
 		}
@@ -43,24 +47,25 @@ bool GameDetailsMenu::HandleChoice(char choice)
 		if (app->IsUserLoggedIn())
 		{
 			vector<LibraryItem*> cUserLib = *(app->GetCurrentUser()->getLibrary());
-			int i;
-			for (i = 0; i < cUserLib.size(); i++)
+			
+			for (int i = 0; i < cUserLib.size(); i++)
 			{
 				if (cUserLib[i]->getGame() == currentGame)
 				{
+					//Play game
+					cUserLib[i]->addTime();
 					break;
 				}
-
-			}
-			if (cUserLib.size() == i)
-			{
-				//Purchase game
-				if (app->GetCurrentUser()->MinusCredits(currentGame->GetCost()))
+				if (cUserLib.size() == i)
 				{
-					app->GetCurrentUser()->getLibrary()->push_back(new LibraryItem(Utils::getCurrentDate(), currentGame, 0));
-					return true;
+					//Purchase game
+					if (app->GetCurrentUser()->MinusCredits(currentGame->GetCost()))
+					{
+						app->GetCurrentUser()->getLibrary()->push_back(new LibraryItem(Utils::getCurrentDate(), currentGame, 0));
+					}
 				}
 			}
+			
 		}
 	}
 	return false;

@@ -9,9 +9,10 @@ class LibraryItem
 		~LibraryItem();
 		const Game* getGame() const;
 		const Date* purchasedDate() const;
-		const double getTime() const;
+		const int getTime() const;
+		const void addTime();
 	private:
 		const Game *game;
 		const Date* purchased; 
-		int time;
+		int timePlayed;
 };
