@@ -109,11 +109,14 @@ bool UserProfile::HandleChoice(char choice)
 		}
 		case 'G':
 		{
+			//dylan to create temp guest user
 			break;
 		}
 		case 'E':
 		{
 			//editguest menu???
+			//to add and remove games from guest games list
+			//poss only shows if guest has been created??
 			//EditGuest("EDIT GUEST GAMES", app);
 			break;
 		}
