@@ -16,6 +16,9 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="LoginUserMenu.cpp" />
+    <ClCompile Include="AddUser.cpp" />
+    <ClCompile Include="RemoveUser.cpp" />
+    <ClCompile Include="GuestAccess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
@@ -84,6 +87,9 @@
     <ClCompile Include="GameDetailsMenu.cpp">
       <Filter>Code\Menus</Filter>
     </ClCompile>
+    <ClInclude Include="AddUser.h" />
+    <ClInclude Include="RemoveUser.h" />
+    <ClInclude Include="GuestAccess.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h">

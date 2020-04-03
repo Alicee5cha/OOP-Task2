@@ -1,5 +1,7 @@
 #include "UserProfile.h"
 #include "GameDetailsMenu.h"
+#include "AddUser.h"
+#include "RemoveUser.h"
 
 UserProfile::UserProfile(const std::string& title, Application* app) : Menu(title, app)
 {
@@ -75,6 +77,8 @@ bool UserProfile::HandleChoice(char choice)
 	}
 	case 'R':
 	{
+		RemoveUser("REMOVE USER", app);
+
 		break;
 	}
 	case 'G':
