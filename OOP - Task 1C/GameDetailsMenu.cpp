@@ -21,12 +21,7 @@ void GameDetailsMenu::OutputOptions()
 				cout << "Game purchased on: " << cUserLib[i]->purchasedDate() << endl;
 				Option('P',"Play game!");
 				
-				if (cUserLib[i]->getTime() < 60)
-					printf("Total Time: %.0f", cUserLib[i]->getTime());
-				else if (cUserLib[i]->getTime() < 300)
-					printf("Total Time: %.1f", ((float)cUserLib[i]->getTime() / 60.0f));
-				else
-					printf("Total Time: %.0f", (cUserLib[i]->getTime()/60));
+				std::cout << "Total Time: " + Utils::ReturnPlayTime(cUserLib[i]->getTime()) << endl;
 
 				break;
 			}
