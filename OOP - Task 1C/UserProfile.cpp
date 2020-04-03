@@ -111,6 +111,12 @@ bool UserProfile::HandleChoice(char choice)
 		{
 			break;
 		}
+		case 'E':
+		{
+			//editguest menu???
+			//EditGuest("EDIT GUEST GAMES", app);
+			break;
+		}
 		case 'N':
 		{
 			sort(app->GetCurrentUser()->getLibrary()->begin(), app->GetCurrentUser()->getLibrary()->end(),sortName);
