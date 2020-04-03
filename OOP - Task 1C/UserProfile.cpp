@@ -1,5 +1,7 @@
 #include "UserProfile.h"
 #include "GameDetailsMenu.h"
+#include "AddUser.h"
+#include "RemoveUser.h"
 #include <algorithm>
 UserProfile::UserProfile(const std::string& title, Application* app) : Menu(title, app)
 {
@@ -41,6 +43,9 @@ void UserProfile::OutputOptions()
 	std::cout << "\n";
 	std::cout << "GAMES";
 	std::cout << "\n";
+	Option('N', "Sort library by name");
+	Option('D', "Sort library by date");
+	std::cout << "\n";
 
 	for (int i = 0; i < app->GetCurrentUser()->getLibrary()->size(); i++)
 	{
@@ -48,9 +53,6 @@ void UserProfile::OutputOptions()
 		// adding 1 so the display is nicer for the user
 		Option(i + 1, gameName);
 	}
-
-	Option('N', "Sort library by name.");
-	Option('D', "Sort by date.");
 
 	User* cUser = app->GetCurrentUser();
 
@@ -97,10 +99,12 @@ bool UserProfile::HandleChoice(char choice)
 		}
 		case 'A':
 		{
+			AddUser("ADD A NEW USER", app);
 			break;
 		}
 		case 'R':
 		{
+			RemoveUser("REMOVE A USER", app);
 			break;
 		}
 		case 'G':

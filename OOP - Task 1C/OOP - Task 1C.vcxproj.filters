@@ -18,7 +18,6 @@
     <ClCompile Include="LoginUserMenu.cpp" />
     <ClCompile Include="AddUser.cpp" />
     <ClCompile Include="RemoveUser.cpp" />
-    <ClCompile Include="GuestAccess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
@@ -89,7 +88,6 @@
     </ClCompile>
     <ClInclude Include="AddUser.h" />
     <ClInclude Include="RemoveUser.h" />
-    <ClInclude Include="GuestAccess.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h">
