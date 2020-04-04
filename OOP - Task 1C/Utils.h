@@ -9,7 +9,7 @@ class Utils
     static std::string getLineFromUser();
     static char getCharFromUser();
     
-    static Date* getCurrentDate();
+    static string getCurrentDate();
 
     static std::string ToUpperR(std::string s);
     static std::string ToUpperI(std::string s);

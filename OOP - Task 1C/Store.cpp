@@ -20,3 +20,7 @@ const bool Store::SearchByPrice(int priceMin, int priceMax) const {
 	//TODO: Show a search page giving only the results of games whose price falls in the range
 	return false;
 }
+
+List<Game*>* Store::GetGames(){
+	return &games;
+}

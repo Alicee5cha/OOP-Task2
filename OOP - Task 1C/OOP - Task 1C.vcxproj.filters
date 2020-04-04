@@ -2,169 +2,53 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
+    <ClCompile Include="AddUser.cpp" />
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Date.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameDetailsMenu.cpp" />
+    <ClCompile Include="Guest.cpp" />
     <ClCompile Include="LibraryItem.cpp" />
+    <ClCompile Include="LoginAccountMenu.cpp" />
+    <ClCompile Include="LoginUserMenu.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RemoveUser.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Store.cpp" />
-    <ClCompile Include="User.cpp" />
-    <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="UserProfile.cpp" />
     <ClCompile Include="StoreMenu.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="LoginUserMenu.cpp" />
-    <ClCompile Include="AddUser.cpp" />
-    <ClCompile Include="RemoveUser.cpp" />
-    <ClCompile Include="GuestAccess.cpp" />
+    <ClCompile Include="User.cpp" />
+    <ClCompile Include="UserProfile.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="GuestGameOptions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
+    <ClInclude Include="AddUser.h" />
     <ClInclude Include="Admin.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="date.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameDetailsMenu.h" />
+    <ClInclude Include="Guest.h" />
     <ClInclude Include="LibraryItem.h" />
+    <ClInclude Include="LoginAccountMenu.h" />
     <ClInclude Include="LoginUserMenu.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="ListT.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RemoveUser.h" />
     <ClInclude Include="Store.h" />
     <ClInclude Include="StoreMenu.h" />
     <ClInclude Include="User.h" />
-    <ClInclude Include="Utils.h" />
     <ClInclude Include="UserProfile.h" />
-    <ClCompile Include="Account.cpp">
-      <Filter>Code\Accounts</Filter>
-    </ClCompile>
-    <ClCompile Include="Admin.cpp">
-      <Filter>Code\Accounts</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Code\Accounts</Filter>
-    </ClCompile>
-    <ClCompile Include="User.cpp">
-      <Filter>Code\Accounts</Filter>
-    </ClCompile>
-    <ClCompile Include="LoginUserMenu.cpp">
-      <Filter>Code\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>Code\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Code\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="StoreMenu.cpp">
-      <Filter>Code\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="Date.cpp">
-      <Filter>Code</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Code</Filter>
-    </ClCompile>
-    <ClCompile Include="LibraryItem.cpp">
-      <Filter>Code</Filter>
-    </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>Code</Filter>
-    </ClCompile>
-    <ClCompile Include="Store.cpp">
-      <Filter>Code</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Code</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils.cpp">
-      <Filter>Code</Filter>
-    </ClCompile>
-    <ClCompile Include="LoginAccountMenu.cpp">
-      <Filter>Code\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="GameDetailsMenu.cpp">
-      <Filter>Code\Menus</Filter>
-    </ClCompile>
-    <ClInclude Include="AddUser.h" />
-    <ClInclude Include="RemoveUser.h" />
-    <ClInclude Include="GuestAccess.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Account.h">
-      <Filter>Headers\Accounts</Filter>
-    </ClInclude>
-    <ClInclude Include="Admin.h">
-      <Filter>Headers\Accounts</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Headers\Accounts</Filter>
-    </ClInclude>
-    <ClInclude Include="User.h">
-      <Filter>Headers\Accounts</Filter>
-    </ClInclude>
-    <ClInclude Include="StoreMenu.h">
-      <Filter>Headers\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Headers\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>Headers\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="LoginUserMenu.h">
-      <Filter>Headers\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="date.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="LibraryItem.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="ListT.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Store.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="LoginAccountMenu.h">
-      <Filter>Headers\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="GameDetailsMenu.h">
-      <Filter>Headers\Menus</Filter>
-    </ClInclude>
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="GuestGameOptions.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Headers">
-      <UniqueIdentifier>{f7240cea-0a79-4b5f-a5b7-b0865df65cf4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Accounts">
-      <UniqueIdentifier>{76bf6614-cbc7-4fa1-9cd5-af1049c9a9ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Menus">
-      <UniqueIdentifier>{c3d060e0-8382-4ae0-b52a-2308aca50fea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code">
-      <UniqueIdentifier>{64f74f1d-8726-4610-89f8-d0613f48f3d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Accounts">
-      <UniqueIdentifier>{48a4f4a0-54fd-49fd-a050-3a92d847ba89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Menus">
-      <UniqueIdentifier>{025da1fa-21b4-4bdb-8a61-354e844aa64d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
 </Project>

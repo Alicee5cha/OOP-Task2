@@ -15,29 +15,16 @@ public:
 	const int getMonth() const;
 	const int getYear() const;
 
-	void getSystemTime(int& hrs, int& mins, int& secs);
-	//get time from system
-
-	const string timeToString(int h, int m, int s);
-	//convert the time to a string in 24-h digital clock format (00:00:00)
-
-	const string getTime();
-	//return the current time in a string format
-
-	void getSystemDate(int& day, int& month, int& year);
-	//get date from system
-
-	string dateToString(int day, int month, int year);
+	string DateToString() const;
 	//convert the date to a string in format (dd/mm/yyyy)
-
-	const string getDate();
-	//return the current date in a string format
 
 	friend ostream& operator<<(ostream& os,const Date* t);
 
 private:
-	int day;
-	int month;
-	int year;
-	tm date;
+	const int getSysDay()const;
+	const int getSysMonth()const;
+	const int getSysYear()const;
+	const int day;
+	const int month;
+	const int year;
 };

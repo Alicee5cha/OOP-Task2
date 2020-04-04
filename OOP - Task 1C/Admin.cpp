@@ -8,3 +8,7 @@ Admin::Admin(const std::string& username, const std::string& password, const std
 Admin::~Admin()
 {
 }
+
+const bool Admin::isAdmin()const{
+	return true;
+}

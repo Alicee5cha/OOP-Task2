@@ -15,6 +15,10 @@ Account::~Account()
 	}
 }
 
+List<User*>* Account::GetUsers(){
+	return &users;
+}
+
 const std::string Account::GetEmail() const{
 	return email;
 }

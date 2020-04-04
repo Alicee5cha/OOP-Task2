@@ -1,5 +1,8 @@
 #include "UserProfile.h"
 #include "GameDetailsMenu.h"
+#include "GuestGameOptions.h"
+#include "AddUser.h"
+#include "RemoveUser.h"
 #include <algorithm>
 UserProfile::UserProfile(const std::string& title, Application* app) : Menu(title, app)
 {
@@ -32,36 +35,40 @@ bool sortDate(LibraryItem* a, LibraryItem* b) {
 
 void UserProfile::OutputOptions()
 {
-	std::string cred = to_string(app->GetCurrentUser()->GetCredit());
-	std::cout << "Credits:" + cred + "\n\n";
+	User* cUser = app->GetCurrentUser();
 
-	Option('I', "Purchase 1 credit");
-	Option('O', "Purchase 10 credits");
-	Option('P', "Purchase 100 credits");
-	std::cout << "\n";
+	if (!cUser->isGuest())//Credit purchasing not for guests.
+	{
+		std::cout << "Credits:" + to_string(cUser->GetCredit()) + "\n\n";
+
+		Option('I', "Purchase 1 credit");
+		Option('O', "Purchase 10 credits");
+		Option('P', "Purchase 100 credits");
+		std::cout << "\n";
+	}
+
 	std::cout << "GAMES";
 	std::cout << "\n";
+	Option('N', "Sort library by name");
+	Option('D', "Sort library by date");
+	std::cout << "\n";
 
-	for (int i = 0; i < app->GetCurrentUser()->getLibrary()->size(); i++)
+	for (int i = 0; i < app->GetCurrentUser()->GetLibrary()->size(); i++)
 	{
-		string gameName = app->GetCurrentUser()->getLibrary()->at(i)->getGame()->GetName();
+		string gameName = cUser->GetLibrary()->at(i)->getGame()->GetName();
 		// adding 1 so the display is nicer for the user
 		Option(i + 1, gameName);
 	}
 
-	Option('N', "Sort library by name.");
-	Option('D', "Sort by date.");
-
-	User* cUser = app->GetCurrentUser();
-
-	if (typeid(*cUser) == typeid(Admin))
+	//Admin options
+	if (cUser->isAdmin())
 	{
 		std::cout << "\n";
 		std::cout << "ADMINISTRATOR";
 		std::cout << "\n";
 		Option('A', "Add new user");
 		Option('R', "Remove user");
-		Option('G', "Guest per-game access");
+		Option('G', "Guest game access");
 	}
 }
 
@@ -71,52 +78,68 @@ bool UserProfile::HandleChoice(char choice)
 // this puts '1' as 0, '2' as 1, '3' as 2, '4' as 3, etc.
 // this reverses the + 1 above and lets us do the range check below
 	int index = choice - '1';
+	User* cUser = app->GetCurrentUser();
 
-	if (index >= 0 && index < app->GetCurrentUser()->getLibrary()->size())
+	//Any user options (Game selection).
+	if (index >= 0 && index < cUser->GetLibrary()->size())
 	{
-		const Game* gameObj = app->GetCurrentUser()->getLibrary()->at(index)->getGame();
-		GameDetailsMenu(Utils::ToUpperI(app->GetCurrentUser()->getLibrary()->at(index)->getGame()->GetName()).c_str(), app, gameObj);
+		const Game* gameObj = cUser->GetLibrary()->at(index)->getGame();
+		GameDetailsMenu(Utils::ToUpperI(gameObj->GetName()).c_str(), app, gameObj);
 	}
 
-	switch (choice)
+
+	//Admin only options
+	if (cUser->isAdmin())
 	{
-		case 'I':
+		switch (choice)
 		{
-			app->GetCurrentUser()->AddCredit(1);
-			break;
-		}
-		case 'O':
-		{
-			app->GetCurrentUser()->AddCredit(10);
-			break;
-		}
-		case 'P':
-		{
-			app->GetCurrentUser()->AddCredit(100);
-			break;
-		}
 		case 'A':
 		{
+			AddUser("ADD A NEW USER", app);
 			break;
 		}
 		case 'R':
 		{
+			RemoveUser("REMOVE A USER", app);
 			break;
 		}
 		case 'G':
 		{
+			GuestGameOptions("SHARED GAMES", app);
 			break;
 		}
-		case 'N':
+		}
+	}
+	//Admin and Player options.
+	if (!cUser->isGuest()) 
+	{
+		switch (choice)
 		{
-			sort(app->GetCurrentUser()->getLibrary()->begin(), app->GetCurrentUser()->getLibrary()->end(),sortName);
-			break;
+			case 'I':
+			{
+				app->GetCurrentUser()->AddCredit(1);
+				break;
+			}
+			case 'O':
+			{
+				app->GetCurrentUser()->AddCredit(10);
+				break;
+			}
+			case 'P':
+			{
+				app->GetCurrentUser()->AddCredit(100);
+				break;
+			}
 		}
-		case 'D':
-		{
-			sort(app->GetCurrentUser()->getLibrary()->begin(), app->GetCurrentUser()->getLibrary()->end(),sortDate);
-			break;
-		}
+	}
+	//Any user options.
+	if (choice == 'N')
+	{
+		sort(app->GetCurrentUser()->GetLibrary()->begin(), app->GetCurrentUser()->GetLibrary()->end(), sortName);
+	}
+	if (choice == 'D')
+	{
+		sort(app->GetCurrentUser()->GetLibrary()->begin(), app->GetCurrentUser()->GetLibrary()->end(), sortDate);
 	}
 
 	return false;
