@@ -16,6 +16,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="LoginUserMenu.cpp" />
+    <ClCompile Include="Guest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
@@ -84,6 +85,7 @@
     <ClCompile Include="GameDetailsMenu.cpp">
       <Filter>Code\Menus</Filter>
     </ClCompile>
+    <ClInclude Include="Guest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h">

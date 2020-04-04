@@ -9,7 +9,7 @@
 class User
 {
 	public:
-		User(const std::string&, const std::string&, const std::string&, int);
+		User(const std::string& u, const std::string& p, const std::string& d, int c);
 		virtual ~User();
 		const std::string& GetUsername() const;
 		const std::string& GetPass() const;
@@ -23,5 +23,6 @@ class User
 		std::string password;
 		Date* created; 
 		int credits;
+	protected:
 		vector<LibraryItem*> library = { };
 };

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 using namespace std;
-Application::Application() : currentAccount(nullptr), currentUser(nullptr)
+Application::Application() : currentAccount(nullptr), currentUser(nullptr),guest(nullptr)
 {
 }
 
@@ -17,10 +17,9 @@ Application::~Application()
 		accounts.deleteFirst();
 	}
 }
-
 bool Application::IsUserLoggedIn() const
 {
-	return currentUser != nullptr;
+	return (currentUser != nullptr || guest != nullptr);
 }
 
 bool Application::IsAccountLoggedIn() const
@@ -81,6 +80,25 @@ const bool Application::LoginUser(const std::string& username, const std::string
 const void Application::LogoutUser()
 {
 	currentUser = nullptr;
+	guest = nullptr;
+}
+
+vector<LibraryItem*> Application::GetAdminGames() const {
+	List<User*> u = GetCurrentAccount()->users;
+	for (int i=0;i<u.length();i++)
+	{
+		if (typeid(u[i]) == typeid(Admin*))
+		{
+			Admin* a = (Admin*) u[i];
+			return a->GetGuestGames();
+		}
+	}
+}
+
+const bool Application::LoginGuest()
+{
+	guest = new Guest(&GetAdminGames());
+	return true;
 }
 
 const void Application::Load()
@@ -274,5 +292,3 @@ const void Application::Save()
 
 	}
 }
-
-//TODO: Fix date class.

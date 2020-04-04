@@ -20,6 +20,7 @@ void MainMenu::OutputOptions()
 		if (!app->IsUserLoggedIn())
 		{
 			Option('L', "Login User");
+			Option('G', "Login Guest User");
 		}
 		else
 		{
@@ -63,6 +64,12 @@ bool MainMenu::HandleChoice(char choice)
 				app->LogoutUser();//'L' Defaults to this if no account is logged in. AKA nothing happens when no account logged in. 
 			}
 		} break;
+
+		case 'G':
+		{
+			app->LoginGuest();
+			break;
+		}
 
 		case 'P':
 		{
