@@ -9,9 +9,12 @@ RemoveUser::RemoveUser(const std::string& title, Application* app) : Menu(title,
 
 void RemoveUser::OutputOptions()
 {
-	for (int i = 0; i < app->GetCurrentAccount()->users.length(); i++)
+	List<User*>* users = app->GetCurrentAccount()->GetUsers();
+	int profileCount = 1;
+	for (int i = 0; i < users->length(); i++)
 	{
-		Option(i + 1, app->GetCurrentAccount()->users[i]->GetUsername());
+		if ((*users)[i]->GetUsername() != app->GetCurrentUser()->GetUsername())
+			Option(profileCount++, (*app->GetCurrentAccount()->GetUsers())[i]->GetUsername());
 	}
 }
 
@@ -23,12 +26,19 @@ bool RemoveUser::HandleChoice(char choice)
 	int index = choice - '1';
 	std::string password;
 
-	if (index >= 0 && index < app->GetCurrentAccount()->users.length())
+	if (index >= 0 && index < app->GetCurrentAccount()->GetUsers()->length())
 	{
-		User* cUser = app->GetCurrentAccount()->users[index];
-		app->GetCurrentAccount()->users.deleteOne(cUser);
+		
+		User* cUser = (*app->GetCurrentAccount()->GetUsers())[index];
+		if (cUser->GetUsername() == app->GetCurrentUser()->GetUsername())
+			if (index != app->GetCurrentAccount()->GetUsers()->length() - 1)
+				cUser = (*app->GetCurrentAccount()->GetUsers())[index + 1];
+			else
+				return false;
 
-			return true;
+		(*app->GetCurrentAccount()->GetUsers()).deleteOne(cUser);
+
+		return true;
 	}
 
 	return false;

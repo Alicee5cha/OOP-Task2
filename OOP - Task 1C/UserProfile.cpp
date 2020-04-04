@@ -1,5 +1,6 @@
 #include "UserProfile.h"
 #include "GameDetailsMenu.h"
+#include "GuestGameOptions.h"
 #include "AddUser.h"
 #include "RemoveUser.h"
 #include <algorithm>
@@ -59,12 +60,6 @@ void UserProfile::OutputOptions()
 		Option(i + 1, gameName);
 	}
 
-	Option('N', "Sort library by name.");
-	Option('D', "Sort by date.");
-
-	User* cUser = app->GetCurrentUser();
-
-
 	//Admin options
 	if (cUser->isAdmin())
 	{
@@ -110,6 +105,7 @@ bool UserProfile::HandleChoice(char choice)
 		}
 		case 'G':
 		{
+			GuestGameOptions("SHARED GAMES", app);
 			break;
 		}
 		}

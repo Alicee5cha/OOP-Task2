@@ -82,20 +82,21 @@ const void Application::LogoutUser()
 	currentUser = nullptr;
 }
 
-vector<LibraryItem*>* Application::GetAdminGames(){
-	List<User*>* cUsers = GetCurrentAccount()->GetUsers();
-	for (int i=0;i<cUsers->length();i++)
-	{
-		User* cUser = (*cUsers)[i];
-		if (cUser->isAdmin())
-				return ((Admin* )cUser)->GetGuestGames();
-	}
-}
-
 const bool Application::LoginGuest()
 {
-	currentUser = new Guest(GetAdminGames());
-	return true;
+	List<User*>* cUsers = GetCurrentAccount()->GetUsers();
+	User* cUser;
+	for (int i = 0; i < cUsers->length(); i++)
+	{
+		cUser = (*cUsers)[i];
+		if (cUser->isAdmin())
+		{
+			currentUser = new Guest(cUser->GetLibrary());
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 const void Application::Load()
@@ -198,17 +199,18 @@ const void Application::Load()
 
 								if (currentLine == headers[3])//Purchased game
 								{
-
+									string shared = "FALSE";
 									getline(file, idL);
 									getline(file, dateL);
 									getline(file, hoursL);
+									getline(file, shared);
 									Game* cGame;
 									for (int i = 0; i < store.GetGames()->length(); i++)
 									{
 										if ((*store.GetGames())[i]->GetId() == stoi(idL))
 										{
 											cGame = (*store.GetGames())[i];
-											LibraryItem* l = new LibraryItem(new Date(dateL), cGame, stoi(hoursL));
+											LibraryItem* l = new LibraryItem(new Date(dateL), cGame, stoi(hoursL),shared=="TRUE");
 											u->GetLibrary()->push_back(l);
 											break;
 										}
@@ -281,6 +283,10 @@ const void Application::Save()
 				file << li[lItem]->getGame()->GetId() << endl;
 				file << li[lItem]->purchasedDate() << endl;
 				file << li[lItem]->getTime() << endl;
+				if (cUser->isAdmin())
+				{
+					file << (li[lItem]->isShared() ? "TRUE" : "FALSE")<<endl;
+				}
 			}
 		}
 

@@ -76,7 +76,14 @@ bool MainMenu::HandleChoice(char choice)
 
 		case 'G':
 		{
-			app->LoginGuest();
+			if (!app->IsUserLoggedIn())
+			{
+				if (app->IsAccountLoggedIn())
+					app->LoginGuest();
+			}
+			else
+				if (app->GetCurrentUser()->isGuest())
+					app->LogoutUser();
 			break;
 		}
 

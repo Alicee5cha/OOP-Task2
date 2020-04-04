@@ -60,7 +60,7 @@ string Utils::ReturnPlayTime(int timeInMinutes)
     string os;
 
     if (timeInMinutes < 60)                 //Minutes
-        os = timeInMinutes + " minutes.";
+        os = to_string(timeInMinutes) + " minutes.";
     else if (timeInMinutes < 300)           //Hours.minutes
     {
         string t = to_string( ((float)timeInMinutes / 60.0f));

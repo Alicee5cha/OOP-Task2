@@ -15,7 +15,6 @@ class Application
 		const bool IsUserLoggedIn() const;
 		Account* GetCurrentAccount() const;
 		User* GetCurrentUser() const;
-		vector<LibraryItem*>* GetAdminGames();
 
 		Store& GetStore();
   

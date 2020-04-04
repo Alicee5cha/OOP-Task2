@@ -1,14 +1,12 @@
 #pragma once
-
 #include "Menu.h"
-#include <string>
-#include <vector>
 
-class UserProfile : public Menu
+class GuestGameOptions : public Menu
 {
 public:
-	UserProfile(const std::string& title, Application* app);
+	GuestGameOptions(const string& title,Application* app);
 	void OutputOptions() override;
 	bool HandleChoice(char choice) override;
 private:
+
 };
