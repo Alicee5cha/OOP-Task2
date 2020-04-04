@@ -52,7 +52,7 @@ void UserProfile::OutputOptions()
 	Option('D', "Sort library by date");
 	std::cout << "\n";
 
-	for (int i = 0; i < app->GetCurrentUser()->getLibrary()->size(); i++)
+	for (int i = 0; i < app->GetCurrentUser()->GetLibrary()->size(); i++)
 	{
 		string gameName = cUser->GetLibrary()->at(i)->getGame()->GetName();
 		// adding 1 so the display is nicer for the user
@@ -73,7 +73,7 @@ void UserProfile::OutputOptions()
 		std::cout << "\n";
 		Option('A', "Add new user");
 		Option('R', "Remove user");
-		Option('G', "Guest per-game access");
+		Option('G', "Guest game access");
 	}
 }
 
@@ -100,10 +100,12 @@ bool UserProfile::HandleChoice(char choice)
 		{
 		case 'A':
 		{
+			AddUser("ADD A NEW USER", app);
 			break;
 		}
 		case 'R':
 		{
+			RemoveUser("REMOVE A USER", app);
 			break;
 		}
 		case 'G':
@@ -142,39 +144,6 @@ bool UserProfile::HandleChoice(char choice)
 	if (choice == 'D')
 	{
 		sort(app->GetCurrentUser()->GetLibrary()->begin(), app->GetCurrentUser()->GetLibrary()->end(), sortDate);
-		case 'A':
-		{
-			AddUser("ADD A NEW USER", app);
-			break;
-		}
-		case 'R':
-		{
-			RemoveUser("REMOVE A USER", app);
-			break;
-		}
-		case 'G':
-		{
-			//dylan to create temp guest user
-			break;
-		}
-		case 'E':
-		{
-			//editguest menu???
-			//to add and remove games from guest games list
-			//poss only shows if guest has been created??
-			//EditGuest("EDIT GUEST GAMES", app);
-			break;
-		}
-		case 'N':
-		{
-			sort(app->GetCurrentUser()->getLibrary()->begin(), app->GetCurrentUser()->getLibrary()->end(),sortName);
-			break;
-		}
-		case 'D':
-		{
-			sort(app->GetCurrentUser()->getLibrary()->begin(), app->GetCurrentUser()->getLibrary()->end(),sortDate);
-			break;
-		}
 	}
 
 	return false;
