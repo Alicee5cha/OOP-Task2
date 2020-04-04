@@ -12,8 +12,9 @@ class Admin : public Player
 		const void addGuestGame(LibraryItem*);
 		const void removeGuestGame(LibraryItem*);
 
-		vector<LibraryItem*> GetGuestGames() const;
+		const bool isAdmin() const override;
+		vector<LibraryItem*>* GetGuestGames();
 private:
-	vector<LibraryItem*> guestGames = {};
+	vector<LibraryItem*>* guestGames = {};
 		
 };

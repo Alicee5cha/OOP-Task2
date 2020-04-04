@@ -11,18 +11,23 @@ Admin::~Admin()
 
 const void Admin::addGuestGame(LibraryItem* game)
 {
-	guestGames.push_back(game);
+	guestGames->push_back(game);
 }
 const void Admin::removeGuestGame(LibraryItem* gameToRemove)
 {
-	for (int i = 0; i < guestGames.size();i++) {
-		if (guestGames[i]->getGame() == gameToRemove->getGame())
+	for (int i = 0; i < guestGames->size();i++) {
+		if ((*guestGames)[i]->getGame() == gameToRemove->getGame())
 		{
-			guestGames[i] == nullptr;
+			(*guestGames)[i] = nullptr;
 		}
 	}
 }
 
-vector<LibraryItem*> Admin::GetGuestGames() const {
+vector<LibraryItem*>* Admin::GetGuestGames(){
 	return guestGames;
+}
+
+
+const bool Admin::isAdmin()const{
+	return true;
 }

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 using namespace std;
-Application::Application() : currentAccount(nullptr), currentUser(nullptr),guest(nullptr)
+Application::Application() : currentAccount(nullptr), currentUser(nullptr)
 {
 }
 
@@ -17,12 +17,12 @@ Application::~Application()
 		accounts.deleteFirst();
 	}
 }
-bool Application::IsUserLoggedIn() const
+const bool Application::IsUserLoggedIn() const
 {
-	return (currentUser != nullptr || guest != nullptr);
+	return (currentUser != nullptr);
 }
 
-bool Application::IsAccountLoggedIn() const
+const bool Application::IsAccountLoggedIn() const
 {
 	return currentAccount != nullptr;
 }
@@ -64,12 +64,12 @@ const void Application::LogoutAccount()
 
 const bool Application::LoginUser(const std::string& username, const std::string& password)
 {
-	for (int i=0;i<currentAccount->users.length();i++)
+	for (int i=0;i<currentAccount->GetUsers()->length();i++)
 	{
-		if (currentAccount->users[i]->GetUsername()._Equal(username))
-			if (currentAccount->users[i]->GetPass()._Equal(password))
+		if ((*currentAccount->GetUsers())[i]->GetUsername()._Equal(username))
+			if ((*currentAccount->GetUsers())[i]->GetPass()._Equal(password))
 			{
-				currentUser = currentAccount->users[i];
+				currentUser = (*currentAccount->GetUsers())[i];
 				return true;
 			}
 			
@@ -80,24 +80,21 @@ const bool Application::LoginUser(const std::string& username, const std::string
 const void Application::LogoutUser()
 {
 	currentUser = nullptr;
-	guest = nullptr;
 }
 
-vector<LibraryItem*> Application::GetAdminGames() const {
-	List<User*> u = GetCurrentAccount()->users;
-	for (int i=0;i<u.length();i++)
+vector<LibraryItem*>* Application::GetAdminGames(){
+	List<User*>* cUsers = GetCurrentAccount()->GetUsers();
+	for (int i=0;i<cUsers->length();i++)
 	{
-		if (typeid(u[i]) == typeid(Admin*))
-		{
-			Admin* a = (Admin*) u[i];
-			return a->GetGuestGames();
-		}
+		User* cUser = (*cUsers)[i];
+		if (cUser->isAdmin())
+				return ((Admin* )cUser)->GetGuestGames();
 	}
 }
 
 const bool Application::LoginGuest()
 {
-	guest = new Guest(&GetAdminGames());
+	currentUser = new Guest(GetAdminGames());
 	return true;
 }
 
@@ -121,8 +118,8 @@ const void Application::Load()
 			getline(file,gDesc);	//Game description.
 			getline(file,gCost);	//Game cost.
 			getline(file,gAgeRat);	//Game agerating.
-
-			store.games.addAtEnd(new Game(stoi(gId),gName, gDesc, stoi(gCost), stoi(gAgeRat))); //Create new game.
+			
+			store.GetGames()->addAtEnd(new Game(stoi(gId),gName, gDesc, stoi(gCost), stoi(gAgeRat))); //Create new game.
 
 			getline(file, currentLine); //Get the next header.
 		}
@@ -177,13 +174,13 @@ const void Application::Load()
 									getline(file, dateL);
 									getline(file, hoursL);
 									Game* cGame;
-									for (int i = 0; i < store.games.length(); i++)
+									for (int i = 0; i < store.GetGames()->length(); i++)
 									{
-										if (store.games[i]->GetId() == stoi(idL))
+										if ((*store.GetGames())[i]->GetId() == stoi(idL))
 										{
-											cGame = store.games[i];
+											cGame = (*store.GetGames())[i];
 											LibraryItem* l = new LibraryItem(new Date(dateL), cGame,stoi(hoursL));
-											u->getLibrary()->push_back(l);
+											u->GetLibrary()->push_back(l);
 										}
 									}
 
@@ -191,7 +188,7 @@ const void Application::Load()
 								}
 							} while (currentLine == headers[3]);
 
-							a->users.addAtEnd(u); //Add the user to the account.
+							(*a->GetUsers()).addAtEnd(u); //Add the user to the account.
 						}
 						else
 						{//Admin
@@ -206,13 +203,13 @@ const void Application::Load()
 									getline(file, dateL);
 									getline(file, hoursL);
 									Game* cGame;
-									for (int i = 0; i < store.games.length(); i++)
+									for (int i = 0; i < store.GetGames()->length(); i++)
 									{
-										if (store.games[i]->GetId() == stoi(idL))
+										if ((*store.GetGames())[i]->GetId() == stoi(idL))
 										{
-											cGame = store.games[i];
+											cGame = (*store.GetGames())[i];
 											LibraryItem* l = new LibraryItem(new Date(dateL), cGame, stoi(hoursL));
-											u->getLibrary()->push_back(l);
+											u->GetLibrary()->push_back(l);
 											break;
 										}
 									}
@@ -220,7 +217,7 @@ const void Application::Load()
 									getline(file, currentLine);
 								}
 							} while (currentLine == headers[3]);
-							a->users.addAtEnd(u);	//After user had been built, add it to the account.
+							(*a->GetUsers()).addAtEnd(u);	//After user had been built, add it to the account.
 						}		
 					}
 								
@@ -244,9 +241,9 @@ const void Application::Save()
 #endif // !_DEBUG
 
 
-	for (int i =0;i<store.games.length();i++)
+	for (int i =0;i<store.GetGames()->length();i++)
 	{
-		Game* currentGame = store.games[i];
+		Game* currentGame = (*store.GetGames())[i];
 		file << "GAME" << endl;
 		file << i << endl;
 		file << currentGame->GetName() << endl;
@@ -263,24 +260,21 @@ const void Application::Save()
 		file << cAcc->GetEmail() << endl;
 		file << cAcc->GetPass() << endl;
 
-		for (int j = 0; j < cAcc->users.length(); j++)
+		for (int j = 0; j < cAcc->GetUsers()->length(); j++)
 		{
-			User* cUser = cAcc->users[j];
-			if (typeid(cUser) == typeid(Admin*))
-			{
+			User* cUser = (*cAcc->GetUsers())[j];
+
+			if (cUser->isAdmin())
 				file << "ACCOUNT-ADMIN" << endl;
-			}
 			else
-			{
 				file << "ACCOUNT-PLAYER" << endl;
-			}
 			
 			file << cUser->GetDateMade() << endl;
 			file << cUser->GetUsername() << endl;
 			file << cUser->GetPass() << endl;
 			file << cUser->GetCredit() << endl;
 
-			vector<LibraryItem*> li = *cUser->getLibrary();
+			vector<LibraryItem*> li = *((Player*) cUser)->GetLibrary();
 			for (int lItem = 0; lItem < li.size(); lItem++)
 			{
 				file << "LIBRARY-ITEM" << endl;

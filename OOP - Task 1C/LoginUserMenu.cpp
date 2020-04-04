@@ -10,9 +10,9 @@ void LoginUserMenu::OutputOptions()
 {
 	if (!app->IsUserLoggedIn())
 	{
-		for (int i = 0; i < app->GetCurrentAccount()->users.length(); i++)
+		for (int i = 0; i < app->GetCurrentAccount()->GetUsers()->length(); i++)
 		{
-			Option(i + 1, app->GetCurrentAccount()->users[i]->GetUsername());
+			Option(i + 1, (*app->GetCurrentAccount()->GetUsers())[i]->GetUsername());
 		}
 	}
 }
@@ -51,9 +51,9 @@ bool LoginUserMenu::HandleChoice(char choice)
 	//}
 
 	//New
-	if (index >= 0 && index < app->GetCurrentAccount()->users.length())
+	if (index >= 0 && index < app->GetCurrentAccount()->GetUsers()->length())
 	{
-		const User* cUser = app->GetCurrentAccount()->users[index];
+		const User* cUser = (*app->GetCurrentAccount()->GetUsers())[index];
 		std::cout << "Enter password for " + cUser->GetUsername() + ": ";	
 		getline(std::cin, password);										
 

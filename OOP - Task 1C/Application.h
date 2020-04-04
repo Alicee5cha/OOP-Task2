@@ -11,11 +11,11 @@ class Application
 		Application();
 		~Application();
 
-		bool IsAccountLoggedIn() const;
-		bool IsUserLoggedIn() const;
+		const bool IsAccountLoggedIn() const;
+		const bool IsUserLoggedIn() const;
 		Account* GetCurrentAccount() const;
 		User* GetCurrentUser() const;
-		vector<LibraryItem*> GetAdminGames()const;
+		vector<LibraryItem*>* GetAdminGames();
 
 		Store& GetStore();
   
@@ -32,5 +32,4 @@ class Application
 		Store store;
 		Account* currentAccount;
 		User* currentUser;
-		Guest* guest;
 };

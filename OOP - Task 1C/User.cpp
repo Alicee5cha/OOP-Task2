@@ -10,7 +10,7 @@ User::~User()
 {
 	for (int i = 0; i < 2; ++i)
 	{
-		delete library[i];
+		delete (*library)[i];
 	}
 }
 
@@ -44,6 +44,13 @@ const bool User::MinusCredits(const int amount) {
 		return false;
 }
 
-vector<LibraryItem*>* User::getLibrary() {
-	return &library;
+const bool User::isGuest() const {
+	return false;
+}
+const bool User::isAdmin() const {
+	return false;
+}
+
+vector<LibraryItem*>* User::GetLibrary() {
+	return library;
 }

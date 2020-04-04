@@ -15,14 +15,22 @@ class User
 		const std::string& GetPass() const;
 		const Date* GetDateMade() const;
 		const int GetCredit()const;
-		vector<LibraryItem*>* getLibrary();
 		const bool MinusCredits(const int amount);
 		int AddCredit(int cred);
+		virtual const bool isGuest() const;
+		virtual const bool isAdmin() const;
+
+
+		vector<LibraryItem*>* GetLibrary();
+
+
 	private:
 		std::string username;
 		std::string password;
 		Date* created; 
 		int credits;
-	protected:
-		vector<LibraryItem*> library = { };
+
+		vector<LibraryItem*>* library = new vector<LibraryItem*>();
+
+
 };

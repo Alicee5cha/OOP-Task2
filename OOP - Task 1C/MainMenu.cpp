@@ -24,8 +24,17 @@ void MainMenu::OutputOptions()
 		}
 		else
 		{
-			Option('L', "Logout of " + app->GetCurrentUser()->GetUsername());
-			Option('P', "View profile for " + app->GetCurrentUser()->GetUsername());
+			
+			if (app->GetCurrentUser()->isGuest())
+			{
+				Option('G', "Logout of Guest");
+				Option('P', "View Guest profile.");
+			}
+			else
+			{
+				Option('L', "Logout of " + app->GetCurrentUser()->GetUsername());
+				Option('P', "View profile for " + app->GetCurrentUser()->GetUsername());
+			}
 		}
 	}
 	

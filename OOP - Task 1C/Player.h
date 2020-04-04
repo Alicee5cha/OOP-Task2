@@ -8,5 +8,5 @@ class Player : public User
 		~Player();
 
 	private:
-		
+
 };
