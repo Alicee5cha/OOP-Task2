@@ -1,5 +1,7 @@
 #include "UserProfile.h"
 #include "GameDetailsMenu.h"
+#include "AddUser.h"
+#include "RemoveUser.h"
 #include <algorithm>
 UserProfile::UserProfile(const std::string& title, Application* app) : Menu(title, app)
 {
@@ -46,7 +48,11 @@ void UserProfile::OutputOptions()
 
 	std::cout << "GAMES";
 	std::cout << "\n";
-	for (int i = 0; i < cUser->GetLibrary()->size(); i++)//Game display.
+	Option('N', "Sort library by name");
+	Option('D', "Sort library by date");
+	std::cout << "\n";
+
+	for (int i = 0; i < app->GetCurrentUser()->getLibrary()->size(); i++)
 	{
 		string gameName = cUser->GetLibrary()->at(i)->getGame()->GetName();
 		// adding 1 so the display is nicer for the user
@@ -56,6 +62,7 @@ void UserProfile::OutputOptions()
 	Option('N', "Sort library by name.");
 	Option('D', "Sort by date.");
 
+	User* cUser = app->GetCurrentUser();
 
 
 	//Admin options
@@ -135,6 +142,39 @@ bool UserProfile::HandleChoice(char choice)
 	if (choice == 'D')
 	{
 		sort(app->GetCurrentUser()->GetLibrary()->begin(), app->GetCurrentUser()->GetLibrary()->end(), sortDate);
+		case 'A':
+		{
+			AddUser("ADD A NEW USER", app);
+			break;
+		}
+		case 'R':
+		{
+			RemoveUser("REMOVE A USER", app);
+			break;
+		}
+		case 'G':
+		{
+			//dylan to create temp guest user
+			break;
+		}
+		case 'E':
+		{
+			//editguest menu???
+			//to add and remove games from guest games list
+			//poss only shows if guest has been created??
+			//EditGuest("EDIT GUEST GAMES", app);
+			break;
+		}
+		case 'N':
+		{
+			sort(app->GetCurrentUser()->getLibrary()->begin(), app->GetCurrentUser()->getLibrary()->end(),sortName);
+			break;
+		}
+		case 'D':
+		{
+			sort(app->GetCurrentUser()->getLibrary()->begin(), app->GetCurrentUser()->getLibrary()->end(),sortDate);
+			break;
+		}
 	}
 
 	return false;
