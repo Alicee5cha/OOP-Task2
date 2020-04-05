@@ -21,8 +21,7 @@ bool StoreMenu::HandleChoice(char choice)
 	// this reverses the + 1 above and lets us do the range check below
 	int index = choice - '1';
 
-	
-	if (index >= 0 && index < app->GetStore().GetGames()->length()) // only gets first char e.g. 12345 will bring up first game, 
+	if (index >= 0 && index < app->GetStore().GetGames()->length())
 	{
 		GameDetailsMenu(Utils::ToUpperI((*app->GetStore().GetGames())[index]->GetName()).c_str(), app, (*app->GetStore().GetGames())[index]);
 	}
