@@ -11,8 +11,7 @@ void GameDetailsMenu::OutputOptions()
 	cout << "Details: "<<currentGame->GetDescription() << endl;
 	cout << "Age Rating: " << currentGame->GetAgeRat() << endl << endl;
 	if (app->IsUserLoggedIn())
-	{
-		
+	{	
 		vector<LibraryItem*>* cUserLib = app->GetCurrentUser()->GetLibrary();
 
 		int i;
@@ -32,13 +31,11 @@ void GameDetailsMenu::OutputOptions()
 		if (cUserLib->size() == i && !app->GetCurrentUser()->isGuest())
 		{
 			Option('P', "Purchase game: " + to_string(currentGame->GetCost()) + " credits");
-		}
-
-		
+		}	
 	}
 	else
 	{
-		cout << "Price: " << to_string(currentGame->GetCost()) << " credits";
+		cout << "Price: " << to_string(currentGame->GetCost()) << " credits\n";
 	}
 }
 
@@ -64,6 +61,12 @@ bool GameDetailsMenu::HandleChoice(char choice)
 					if (app->GetCurrentUser()->MinusCredits(currentGame->GetCost()))
 					{
 						app->GetCurrentUser()->GetLibrary()->push_back(new LibraryItem(new Date(), currentGame, 0));
+					}
+					else
+					{
+						cout << "\n\tNot enough credits!";
+						cout << "\n\tPress any key to continue";
+						_getwch();//Wait for user input before continuing. This functions return value is ignored on purpose.
 					}
 				}
 			}

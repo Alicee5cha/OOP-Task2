@@ -40,6 +40,12 @@ bool RemoveUser::HandleChoice(char choice)
 
 		return true;
 	}
+	else
+	{
+		cout << "\n\tChoose a valid user";
+		cout << "\n\tPress any key to continue";
+		_getwch();//Wait for user input before continuing. This functions return value is ignored on purpose.
+	}
 
 	return false;
 }

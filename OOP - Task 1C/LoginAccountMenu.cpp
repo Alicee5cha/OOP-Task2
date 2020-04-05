@@ -46,5 +46,12 @@ bool LoginAccountMenu::HandleChoice(char choice)
 			_getwch();//Wait for user input before continuing. This functions return value is ignored on purpose.
 		}
 	}
+	else
+	{
+		cout << "\n\tChoose a valid account";
+		cout << "\n\tPress any key to continue";
+		_getwch();//Wait for user input before continuing. This functions return value is ignored on purpose.
+	}
+
 	return false;
 }
