@@ -20,11 +20,21 @@ void MainMenu::OutputOptions()
 		if (!app->IsUserLoggedIn())
 		{
 			Option('L', "Login User");
+			Option('G', "Login Guest User");
 		}
 		else
 		{
-			Option('L', "Logout of " + app->GetCurrentUser()->GetUsername());
-			Option('P', "View profile for " + app->GetCurrentUser()->GetUsername());
+			
+			if (app->GetCurrentUser()->isGuest())
+			{
+				Option('G', "Logout of Guest");
+				Option('P', "View Guest profile.");
+			}
+			else
+			{
+				Option('L', "Logout of " + app->GetCurrentUser()->GetUsername());
+				Option('P', "View profile for " + app->GetCurrentUser()->GetUsername());
+			}
 		}
 	}
 	
@@ -63,6 +73,19 @@ bool MainMenu::HandleChoice(char choice)
 				app->LogoutUser();//'L' Defaults to this if no account is logged in. AKA nothing happens when no account logged in. 
 			}
 		} break;
+
+		case 'G':
+		{
+			if (!app->IsUserLoggedIn())
+			{
+				if (app->IsAccountLoggedIn())
+					app->LoginGuest();
+			}
+			else
+				if (app->GetCurrentUser()->isGuest())
+					app->LogoutUser();
+			break;
+		}
 
 		case 'P':
 		{

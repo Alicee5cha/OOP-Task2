@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Account.h"
-
+#include "Guest.h"
 #include "Admin.h"
 #include "Store.h"
 
@@ -11,8 +11,8 @@ class Application
 		Application();
 		~Application();
 
-		bool IsAccountLoggedIn() const;
-		bool IsUserLoggedIn() const;
+		const bool IsAccountLoggedIn() const;
+		const bool IsUserLoggedIn() const;
 		Account* GetCurrentAccount() const;
 		User* GetCurrentUser() const;
 
@@ -22,6 +22,7 @@ class Application
 		const void LogoutAccount();
 		const bool LoginUser(const std::string& username, const std::string& password);
 		const void LogoutUser();
+		const bool LoginGuest();
 		const void Load();
 		const void Save();
 		

@@ -10,9 +10,9 @@ void LoginUserMenu::OutputOptions()
 {
 	if (!app->IsUserLoggedIn())
 	{
-		for (int i = 0; i < app->GetCurrentAccount()->users.length(); i++)
+		for (int i = 0; i < app->GetCurrentAccount()->GetUsers()->length(); i++)
 		{
-			Option(i + 1, app->GetCurrentAccount()->users[i]->GetUsername());
+			Option(i + 1, (*app->GetCurrentAccount()->GetUsers())[i]->GetUsername());
 		}
 	}
 }
@@ -25,35 +25,9 @@ bool LoginUserMenu::HandleChoice(char choice)
 	int index = choice - '1';
 	std::string password;
 
-
-	////OLD
-	//while (index >= 0 && index < app->GetCurrentAccount()->users.length()) //greater than 0, less than the number of users in the list
-	//{
-	//		while ((password.empty())) //if cin is empty, try again
-	//		{	
-	//			std::cout << "Enter password for " + cUser->GetUsername() + ": ";
-	//			getline(std::cin, password);
-	//		}
-
-	//		while (!(password == cUser->GetPass())) //if cin password doesnt match stored password, try again
-	//		{
-	//			std::cout << "Wrong password, try again: ";
-	//			getline(std::cin, password);
-	//		}
-
-	//		if (app->LoginUser(cUser->GetUsername(), password))
-	//		{
-	//			//if password is correct go back to main menu
-	//			return true;
-	//		}
-	//		else
-	//			cout << "\n\tPassword incorrect.";
-	//}
-
-	//New
-	if (index >= 0 && index < app->GetCurrentAccount()->users.length())
+	if (index >= 0 && index < app->GetCurrentAccount()->GetUsers()->length())
 	{
-		const User* cUser = app->GetCurrentAccount()->users[index];
+		const User* cUser = (*app->GetCurrentAccount()->GetUsers())[index];
 		std::cout << "Enter password for " + cUser->GetUsername() + ": ";	
 		getline(std::cin, password);										
 
@@ -69,5 +43,12 @@ bool LoginUserMenu::HandleChoice(char choice)
 			_getwch();//Wait for user input before continuing. This functions return value is ignored on purpose.
 		}
 	}
+	else
+	{
+		cout << "\n\tChoose a valid user";
+		cout << "\n\tPress any key to continue";
+		_getwch();//Wait for user input before continuing. This functions return value is ignored on purpose.
+	}
+
 return false;
 }

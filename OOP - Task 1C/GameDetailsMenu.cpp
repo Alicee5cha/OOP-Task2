@@ -11,37 +11,31 @@ void GameDetailsMenu::OutputOptions()
 	cout << "Details: "<<currentGame->GetDescription() << endl;
 	cout << "Age Rating: " << currentGame->GetAgeRat() << endl << endl;
 	if (app->IsUserLoggedIn())
-	{
-		vector<LibraryItem*> cUserLib = *(app->GetCurrentUser()->getLibrary());
+	{	
+		vector<LibraryItem*>* cUserLib = app->GetCurrentUser()->GetLibrary();
+
 		int i;
-		for (i = 0; i < cUserLib.size(); i++)
+		for (i = 0; i < cUserLib->size(); i++)
 		{
-			if (cUserLib[i]->getGame() == currentGame)
+			if ((*cUserLib)[i]->getGame() == currentGame)
 			{
-				cout << "Game purchased on: " << cUserLib[i]->purchasedDate() << endl;
+				cout << "Game purchased on: " << (*cUserLib)[i]->purchasedDate() << endl;
 				Option('P',"Play game!");
 				
-				if (cUserLib[i]->getTime() < 60)
-					printf("Total Time: %.0f", cUserLib[i]->getTime());
-				else if (cUserLib[i]->getTime() < 300)
-					printf("Total Time: %.1f", ((float)cUserLib[i]->getTime() / 60.0f));
-				else
-					printf("Total Time: %.0f", (cUserLib[i]->getTime()/60));
+				std::cout << "Total Time: " + Utils::ReturnPlayTime((*cUserLib)[i]->getTime()) << endl;
 
 				break;
 			}
 		}
 
-		if (cUserLib.size() == i)
+		if (cUserLib->size() == i && !app->GetCurrentUser()->isGuest())
 		{
 			Option('P', "Purchase game: " + to_string(currentGame->GetCost()) + " credits");
-		}
-
-		
+		}	
 	}
 	else
 	{
-		cout << "Price: " << to_string(currentGame->GetCost()) << " credits";
+		cout << "Price: " << to_string(currentGame->GetCost()) << " credits\n";
 	}
 }
 
@@ -51,7 +45,7 @@ bool GameDetailsMenu::HandleChoice(char choice)
 	{
 		if (app->IsUserLoggedIn())
 		{
-			vector<LibraryItem*> cUserLib = *(app->GetCurrentUser()->getLibrary());
+			vector<LibraryItem*> cUserLib = *(app->GetCurrentUser()->GetLibrary());
 			
 			for (int i = 0; i < cUserLib.size(); i++)
 			{
@@ -61,12 +55,18 @@ bool GameDetailsMenu::HandleChoice(char choice)
 					cUserLib[i]->addTime();
 					break;
 				}
-				if (cUserLib.size() == i)
+				if (cUserLib.size()-1 == i && !app->GetCurrentUser()->isGuest())
 				{
 					//Purchase game
 					if (app->GetCurrentUser()->MinusCredits(currentGame->GetCost()))
 					{
-						app->GetCurrentUser()->getLibrary()->push_back(new LibraryItem(Utils::getCurrentDate(), currentGame, 0));
+						app->GetCurrentUser()->GetLibrary()->push_back(new LibraryItem(new Date(), currentGame, 0));
+					}
+					else
+					{
+						cout << "\n\tNot enough credits!";
+						cout << "\n\tPress any key to continue";
+						_getwch();//Wait for user input before continuing. This functions return value is ignored on purpose.
 					}
 				}
 			}

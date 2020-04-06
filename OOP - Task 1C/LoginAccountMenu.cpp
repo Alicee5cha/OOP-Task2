@@ -9,7 +9,7 @@ LoginAccountMenu::LoginAccountMenu(const std::string& title, Application* app) :
 
 void LoginAccountMenu::OutputOptions()
 {
-	if (!app->IsUserLoggedIn())
+	if (!app->IsUserLoggedIn() && !app->IsAccountLoggedIn())
 	{
 		for (int i = 0; i < app->accounts.length(); i++)
 		{
@@ -27,30 +27,6 @@ bool LoginAccountMenu::HandleChoice(char choice)
 	int index = choice - '1';
 	std::string password;
 
-	//while ((index >= 0 && index < app->accounts.length())) //greater than 0, less than the number of accounts in the list
-	//{
-	//	const Account* cAcc = app->accounts[index];
-
-	//	while ((password.empty())) //if cin is empty, try again
-	//	{
-	//		std::cout << "Enter password for " + cAcc->GetEmail() + ": ";
-	//		getline(std::cin, password);
-
-	//		while (!(password == cAcc->GetPass())) //if cin password doesnt match stored password, try again
-	//		{
-	//			std::cout << "Wrong password, try again: ";
-	//			getline(std::cin, password);
-	//		}
-	//	}
-
-	//	std::cout << "Login successful";
-	//	if (app->LoginAccount(cAcc->GetEmail(), password))
-	//	{
-	//		//if password is correct go back to main menu
-	//		return true;
-	//	}
-	//}
-		
 	//New
 	if (index >= 0 && index < app->accounts.length())
 	{
@@ -70,5 +46,12 @@ bool LoginAccountMenu::HandleChoice(char choice)
 			_getwch();//Wait for user input before continuing. This functions return value is ignored on purpose.
 		}
 	}
+	else
+	{
+		cout << "\n\tChoose a valid account";
+		cout << "\n\tPress any key to continue";
+		_getwch();//Wait for user input before continuing. This functions return value is ignored on purpose.
+	}
+
 	return false;
 }

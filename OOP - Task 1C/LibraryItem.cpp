@@ -1,6 +1,10 @@
 #include "LibraryItem.h"
 #include "date.h"
-LibraryItem::LibraryItem(Date* d, const Game* game, int t): purchased(d), game(game),time(t)
+#include"Utils.h"
+LibraryItem::LibraryItem(Date* d, const Game* game, int t): purchased(d), game(game),timePlayed(t)
+{
+}
+LibraryItem::LibraryItem(Date* d, const Game* game, int t,bool shared) : purchased(d), game(game), timePlayed(t),shareable(shared)
 {
 }
 
@@ -16,10 +20,22 @@ const Date* LibraryItem::purchasedDate() const {
 	return purchased;
 }
 
-const double LibraryItem::getTime() const {
-	return time;
+const int LibraryItem::getTime() const {
+	return timePlayed;
 }
 
 const void LibraryItem::addTime() {
-	time += rand() % 60 + 10;
+	timePlayed += Utils::randomInt(10, 60);
+}
+
+const void LibraryItem::unShareGame() {
+	shareable = false;
+}
+
+const void LibraryItem::shareGame() {
+	shareable = true;
+}
+
+const bool LibraryItem::isShared() const {
+	return shareable;
 }

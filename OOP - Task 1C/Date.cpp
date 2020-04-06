@@ -3,23 +3,20 @@
 #include <ctime>
 #include <time.h>
 #include "Date.h"
-
 using namespace std;
-Date::Date()
-{
-}
-Date::Date(string date)
-{
-	year = stoi(date.substr(0, 4));
-	month = stoi(date.substr(5, 2));
-	day = stoi(date.substr(8, 2));
 
-	
+Date::Date():day(getSysDay()),month(getSysMonth()),year(getSysYear())
+{
 }
+
+Date::Date(string date):
+year(stoi(date.substr(0, 4))),
+month(stoi(date.substr(5, 2))),
+day(stoi(date.substr(8, 2)))
+{}
+
 Date::Date(int d, int m, int y):day(d),month(m),year(y)
-{
-
-}
+{}
 
 const int Date::getDay() const
 {
@@ -34,61 +31,45 @@ const int Date::getYear() const
 	return year;
 }
 
-void Date::getSystemTime(int& hrs, int& mins, int& secs)
-{ //get time from system
-	//set to system time
-	time_t now(time(0));
-	struct tm t;
+const int Date::getSysYear() const
+{
+	time_t now = time(0);
+	tm t; 
+	localtime_s(&t,&now);
+	return t.tm_year + 1900;
+}
+const int Date::getSysMonth() const
+{
+	time_t now = time(0);
+	tm t;
 	localtime_s(&t, &now);
-	hrs = t.tm_hour;
-	mins = t.tm_min;
-	secs = t.tm_sec;
+	return t.tm_mon+1;
 }
-
-const string Date::timeToString(int h, int m, int s)
-{ //convert the time to a string in 24-h digital clock format (00:00:00)
-	ostringstream os;
-	const char prev(os.fill('0'));
-	os << setw(2) << h << ":"
-		<< setw(2) << m << ":"
-		<< setw(2) << s;
-	os.fill(prev);
-	return os.str();
-}
-
-const string Date::getTime()
-{ //return the current time in a string format
-	int hrs, mins, secs;		//hold the current time
-	getSystemTime(hrs, mins, secs);
-	return timeToString(hrs, mins, secs);
-}
-
-void Date::getSystemDate(int& day, int& month, int& year)
-{ //get date from system
-	time_t now(time(0));
-	struct tm t;
+const int Date::getSysDay() const
+{
+	time_t now = time(0);
+	tm t;
 	localtime_s(&t, &now);
-	day = t.tm_mday;
-	month = t.tm_mon + 1;
-	year = t.tm_year + 1900;
+	return t.tm_mday;
 }
 
-string Date::dateToString(int day, int month, int year)
+
+string Date::DateToString() const
 { //convert the date to a string in format (yyyy-mm-dd)
-	std::string os;
-	os = year + "-";
-	os += month + "-" + day;
+	std::string os="";
+	os = to_string(year) + "-";
+	if (month < 10)
+		os += "0" + to_string(month) + "-";
+	else
+		os += to_string(month) + "-";
+
+	if (day < 10)
+		os += "0" + to_string(day);
+	else
+		os += to_string(day);
 	
 	return os;
 }
-
-const string Date::getDate()
-{ //return the current date in a string format
-	int day, month, year;		//hold the current date
-	getSystemDate(day, month, year);
-	return dateToString(day, month, year);
-}
-
 
 ostream& operator<<(ostream& os, const Date* t)
 {

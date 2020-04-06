@@ -8,16 +8,10 @@
 #include "Utils.h"
 #include "MainMenu.h"
 
-void createHardcodedTestData(Application* app)
-{
-	
-}
-
 
 void main()
 {
 	Application* app = new Application();
-	//createHardcodedTestData(app);
 
 	app->Load();
 

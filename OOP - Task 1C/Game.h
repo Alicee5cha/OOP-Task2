@@ -14,9 +14,9 @@ class Game
 		const int GetAgeRat() const;
 		const int GetId() const;
 	private:
-		int id;
-		std::string name;
-		std::string description;
-		int cost;
-		int ageRating;
+		const int id;
+		const std::string name;
+		const std::string description;
+		const int cost;
+		const int ageRating;
 };
