@@ -8,7 +8,7 @@ MainMenu::MainMenu(const std::string& title, Application* app) : Menu(title, app
 
 void MainMenu::OutputOptions()
 {
-	Option('B', "Browse Store");
+	Option('R', "Browse Store");
 	Option('S', "Search Store");
 
 	if (!app->IsAccountLoggedIn())
@@ -46,7 +46,7 @@ bool MainMenu::HandleChoice(char choice)
 {
 	switch (choice)
 	{
-		case 'B':
+		case 'R':
 		{
 			StoreMenu("STORE", app);
 
