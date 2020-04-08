@@ -22,13 +22,13 @@
     <ProjectGuid>{F10EDC77-6535-4A8E-9D23-1D029C5B2034}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>OOPTask1C</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -162,6 +162,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RemoveUser.cpp" />
+    <ClCompile Include="SearchMenu.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Store.cpp" />
     <ClCompile Include="StoreMenu.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="ListT.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RemoveUser.h" />
+    <ClInclude Include="SearchMenu.h" />
     <ClInclude Include="Store.h" />
     <ClInclude Include="StoreMenu.h" />
     <ClInclude Include="User.h" />

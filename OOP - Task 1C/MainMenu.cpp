@@ -1,4 +1,5 @@
 #include "MainMenu.h"
+#include "SearchMenu.h"
 
 MainMenu::MainMenu(const std::string& title, Application* app) : Menu(title, app)
 {
@@ -7,7 +8,8 @@ MainMenu::MainMenu(const std::string& title, Application* app) : Menu(title, app
 
 void MainMenu::OutputOptions()
 {
-	Option('S', "Browse Store");
+	Option('B', "Browse Store");
+	Option('S', "Search Store");
 
 	if (!app->IsAccountLoggedIn())
 	{
@@ -44,12 +46,17 @@ bool MainMenu::HandleChoice(char choice)
 {
 	switch (choice)
 	{
-		case 'S':
+		case 'B':
 		{
 			StoreMenu("STORE", app);
 
 		} break;
 
+		case 'S':
+		{
+			SearchMenu("SEARCH MENU", app);
+
+		} break;
 		case 'A':
 		{
 			if (!app->IsAccountLoggedIn())

@@ -8,8 +8,8 @@ class Store
 		Store();
 		~Store();
 
-		const bool SearchByName(std::string name) const;
-		const bool SearchByPrice(int priceMin, int priceMax) const;
+		const List<Game*>* SearchByName(std::string name);
+		const List<Game*>* SearchByPrice(int priceMin, int priceMax);
 		List<Game*>* GetGames();
 	private:
 		List<Game*> games = { };

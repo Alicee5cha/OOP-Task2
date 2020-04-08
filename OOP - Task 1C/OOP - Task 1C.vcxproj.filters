@@ -23,6 +23,7 @@
     <ClCompile Include="UserProfile.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="GuestGameOptions.cpp" />
+    <ClCompile Include="SearchMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
@@ -47,6 +48,7 @@
     <ClInclude Include="UserProfile.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="GuestGameOptions.h" />
+    <ClInclude Include="SearchMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data.txt" />

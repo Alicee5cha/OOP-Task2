@@ -1,17 +1,28 @@
 #include "StoreMenu.h"
 #include "GameDetailsMenu.h"
-StoreMenu::StoreMenu(const std::string& title, Application* app) : Menu(title, app)
+StoreMenu::StoreMenu(const std::string& title, Application* app) : Menu(title, app), SearchResults(app->GetStore().GetGames())
 {
 	Paint(); // required in constructor
 }
 
+StoreMenu::StoreMenu(const std::string& title, Application* app, std::string* SearchName) : Menu(title, app), SearchResults(app->GetStore().SearchByName(*SearchName))
+{
+	Paint(); // required in constructor
+}
+
+StoreMenu::StoreMenu(const std::string& title, Application* app, int PriceMin, int PriceMax) : Menu(title, app), SearchResults(app->GetStore().SearchByPrice(PriceMin, PriceMax))
+{
+	Paint(); // required in constructor
+}
 void StoreMenu::OutputOptions()
 {
-	for (int i = 0; i <  app->GetStore().GetGames()->length(); i++)
+	
+	for (int i = 0; i < SearchResults->length(); i++)
 	{
 		// adding 1 so the display is nicer for the user
-		Option(i + 1, (*app->GetStore().GetGames())[i]->GetName());
+		Option(i + 1, (*SearchResults)[i]->GetName());
 	}
+	
 }
 
 bool StoreMenu::HandleChoice(char choice)
@@ -21,11 +32,10 @@ bool StoreMenu::HandleChoice(char choice)
 	// this reverses the + 1 above and lets us do the range check below
 	int index = choice - '1';
 
-	if (index >= 0 && index < app->GetStore().GetGames()->length())
+	if (index >= 0 && index < SearchResults->length())
 	{
-		GameDetailsMenu(Utils::ToUpperI((*app->GetStore().GetGames())[index]->GetName()).c_str(), app, (*app->GetStore().GetGames())[index]);
+		GameDetailsMenu(Utils::ToUpperI((*SearchResults)[index]->GetName()).c_str(), app, (*SearchResults)[index]);
 	}
 
 	return false;
 }
-
